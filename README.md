@@ -55,6 +55,37 @@ Skill is `1 - candidate pinball / last-value pinball`; positive is better. The M
 smoke artifact is in [artifacts/modal-smoke/run.json](artifacts/modal-smoke/run.json).
 These results are evidence for the implementation, not a claim about withheld judging data.
 
+> **Development / burned evidence.** The +0.0513 held-out figure was published and has been
+> inspected, so those origins can no longer serve as a fresh confirmation set. Treat it as
+> development evidence only; any new real-data claim needs a fresh, pre-committed block and
+> its study hash.
+
+## Budget-matched study (research harness)
+
+`rsi_sandbox.study.run_study` (programmatic API; a CLI is deferred) asks whether
+champion-conditioned search beats a matched champion-independent control at an equal
+budget, using preregistered, embargoed folds.
+
+- Arms: `flat` (no search, re-run to match the ledger), `recursive` (local mutations of
+  the evolving champion, fixed seeds skipped) and `control` (the identical mutation
+  operator, rng stream, `seen` set and budget, anchored on the fixed starting incumbent).
+  Until a promotion changes the champion the two arms draw identical proposals, so the
+  gap isolates inheritance rather than exploration breadth.
+- Primary budget: charged candidate-origin execution attempts. A failed candidate is
+  charged its full slot; infrastructure failures retry at most once and are counted
+  separately. Unequal budgets invalidate the comparison. No Modal dollars are measured.
+- Train origins screen, validation origins promote, held-out origins run once per arm after
+  the lineage is frozen. Splits must be disjoint, chronological and separated by at least
+  `max(horizons)` days; study specs reject unknown keys and resource-policy keys.
+- Output: a canonical result dict (spec SHA, scorer SHA, git commit and dirty-tree hash,
+  per-run trace hash over request/response SHA-256, sealed held-out ledger, and a paired
+  fold difference with an exact sign-flip permutation test, at most 14 folds).
+- Synthetic calibration (not evidence about GPU prices). `planted`: a steady trend makes
+  `drift_scale` and `interval_scale` individually beneficial, so the recursive arm can stack
+  them across generations while the control plateaus — it tests compounding through
+  inheritance and nothing else. `null`: unpredictable shocks; over 20 studies the mean
+  recursive-minus-control gap is -0.004 skill (SE 0.010) with 0/20 false positives.
+
 ## Safety boundary
 
 ```text

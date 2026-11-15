@@ -1,18 +1,25 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import json
 import math
 import subprocess
+from collections import Counter
+from collections.abc import Callable
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
-from .data import Dataset, day_of, iso
+from . import evaluation
+from .data import Dataset, day_of, iso, sha256_file
 from .evaluation import evaluate_forecasts
-from .executors import ExecutionResult, Executor
-from .models import CandidateConfig, ForecastRow, Metrics
+from .executors import ExecutionError, ExecutionResult, Executor, FailureKind
+from .models import CandidateConfig, ForecastRow, Metrics, canonical_json
 from .proposer import BoundedProposer, signature
+from .splits import SplitSpec
+
+Propose = Callable[[CandidateConfig, int, int, set], list[CandidateConfig]]
 
 
 def date_origins(start: str, end: str, step_days: int = 7) -> list[str]:
@@ -42,22 +49,27 @@ def evaluate_candidate(
     horizons: tuple[int, ...],
     executor: Executor,
 ) -> tuple[Metrics, list[dict[str, Any]], list[tuple[str, list[ForecastRow]]]]:
+    """Run one candidate over origins; an infrastructure failure is retried at most once."""
+
     traces: list[dict[str, Any]] = []
     forecasts: list[tuple[str, list[ForecastRow]]] = []
     for origin in origins:
         request = dataset.history_request(origin, horizons, candidate.to_dict())
-        try:
-            result: ExecutionResult = executor.execute(request)
-        except Exception as exc:
-            traces.append(
-                {
-                    "event": "experiment_failed",
-                    "candidate_id": candidate.candidate_id,
-                    "origin": origin,
-                    "error": f"{type(exc).__name__}: {exc}",
-                }
-            )
-            return _failure_metrics(traces[-1]["error"]), traces, forecasts
+        for attempt in (1, 2):
+            try:
+                result: ExecutionResult = executor.execute(request)
+                break
+            except Exception as exc:
+                infra = FailureKind.INFRASTRUCTURE_FAILURE
+                kind = exc.kind if isinstance(exc, ExecutionError) else infra
+                event = {"candidate_id": candidate.candidate_id, "origin": origin}
+                event |= {"failure_kind": kind.value, "attempt": attempt}
+                if kind is infra and attempt == 1:
+                    traces.append({"event": "infra_retry", **event})
+                    continue
+                # host-side trace only; proposers see just the typed kind
+                traces.append({"event": "experiment_failed", **event, "error": str(exc)[:300]})
+                return _failure_metrics(f"execution failure: {kind.value}"), traces, forecasts
         forecasts.append((origin, result.rows))
         traces.append(
             {
@@ -65,6 +77,7 @@ def evaluate_candidate(
                 "candidate_id": candidate.candidate_id,
                 "origin": origin,
                 "request_sha256": result.request_sha256,
+                "response_sha256": result.response_sha256,
                 "backend": result.backend,
                 "duration_seconds": round(result.duration_seconds, 6),
                 "forecast_rows": len(result.rows),
@@ -91,13 +104,26 @@ def promotion_reasons(
     return reasons
 
 
-def _git_commit() -> str | None:
+def _git(*args: str) -> str | None:
+    root = Path(__file__).resolve().parents[2]
     try:
         return subprocess.check_output(
-            ["git", "rev-parse", "HEAD"], text=True, stderr=subprocess.DEVNULL
-        ).strip()
+            ["git", "-C", str(root), *args], text=True, stderr=subprocess.DEVNULL
+        )
     except (OSError, subprocess.CalledProcessError):
         return None
+
+
+def provenance() -> dict[str, Any]:
+    """Source identity: commit, dirty-tree state/hash and scorer SHA-256."""
+
+    commit, status, diff = _git("rev-parse", "HEAD"), _git("status", "--porcelain"), _git("diff")
+    return {
+        "git_commit": commit.strip() if commit else None,
+        "git_dirty": None if status is None else bool(status.strip()),
+        "git_dirty_sha256": hashlib.sha256(f"{status}\n{diff}".encode()).hexdigest(),
+        "scorer_sha256": sha256_file(Path(evaluation.__file__)),
+    }
 
 
 def _json_safe(value: Any) -> Any:
@@ -133,6 +159,116 @@ def _write_forecast(path: Path, rows: list[ForecastRow], candidate: CandidateCon
             writer.writerow(value)
 
 
+def run_search(
+    dataset: Dataset,
+    executor: Executor,
+    splits: SplitSpec,
+    propose: Propose,
+    generations: int,
+    candidates_per_generation: int,
+    min_skill_gain: float = 0.002,
+    max_coverage_regression: float = 0.05,
+    log: Callable[[str], None] = lambda _message: None,
+) -> dict[str, Any]:
+    """Train screens, validation (when given) promotes, held-out runs once at the end.
+
+    Every candidate is charged its full slot (train + validation origins) even when it
+    fails early, so arms with different failure rates still consume equal budgets.
+    """
+
+    splits.validate()  # before any executor activity
+    phases = [("train", list(splits.train)), ("validation", list(splits.validation))]
+    phases = [(name, origins) for name, origins in phases if origins]
+    gate = phases[-1][0]
+    traces: list[dict[str, Any]] = []
+    charged = 0
+
+    def evaluate(candidate: CandidateConfig) -> dict[str, Metrics]:
+        nonlocal charged
+        charged += sum(len(origins) for _, origins in phases)
+        scored: dict[str, Metrics] = {}
+        for name, origins in phases:
+            scored[name], new_traces, _ = evaluate_candidate(
+                dataset, candidate, origins, splits.horizons, executor
+            )
+            traces.extend(new_traces)
+            if not scored[name].valid:
+                break
+        return scored
+
+    incumbent = CandidateConfig(name="flat-last-value")
+    seen = {signature(incumbent)}
+    experiments: list[dict[str, Any]] = []
+    lineage = [incumbent.candidate_id]
+    incumbent_metrics = evaluate(incumbent)
+    failed = [m for m in incumbent_metrics.values() if not m.valid]
+    if failed:
+        raise RuntimeError(f"incumbent evaluation failed: {failed[0].violations[:3]}")
+
+    for generation in range(1, generations + 1):
+        proposals = propose(incumbent, generation, candidates_per_generation, seen)
+        eligible: list[tuple[CandidateConfig, dict[str, Metrics]]] = []
+        for candidate in proposals:
+            seen.add(signature(candidate))
+            metrics = evaluate(candidate)
+            decisive = metrics.get(gate, metrics["train"])  # train failure stops before gate
+            reasons = promotion_reasons(
+                decisive, incumbent_metrics[gate], min_skill_gain, max_coverage_regression
+            )
+            record: dict[str, Any] = {
+                "generation": generation,
+                "candidate": candidate.to_dict(),
+                "train_metrics": metrics["train"].to_dict(),
+                "promotion_gate": {"passed": not reasons, "reasons": reasons},
+            }
+            experiments.append(record)
+            status = "eligible" if not reasons else "rejected"
+            log(
+                f"g{generation} {candidate.candidate_id}: skill={decisive.skill:.4f} "
+                f"coverage={decisive.coverage_80:.3f} [{status}]"
+            )
+            if not reasons:
+                eligible.append((candidate, metrics))
+        if eligible:
+            incumbent, incumbent_metrics = min(eligible, key=lambda item: item[1][gate].pinball)
+            lineage.append(incumbent.candidate_id)
+            log(f"promoted -> {incumbent.candidate_id}")
+
+    events = Counter(t["event"] for t in traces)
+    ledger = {
+        "charged_attempts": charged,
+        "executed_attempts": events["experiment_completed"] + events["experiment_failed"],
+        "infra_retries": events["infra_retry"],
+        "failures": dict(
+            Counter(t["failure_kind"] for t in traces if t["event"] == "experiment_failed")
+        ),
+        "heldout_attempts": len(splits.heldout),
+    }
+    # Held-out is touched exactly once, after the last promotion decision.
+    heldout_metrics, heldout_traces, _ = evaluate_candidate(
+        dataset, incumbent, list(splits.heldout), splits.horizons, executor
+    )
+    return {
+        "champion": incumbent,
+        "lineage": lineage,
+        "train_metrics": incumbent_metrics["train"],
+        "validation_metrics": incumbent_metrics.get("validation"),
+        "heldout_metrics": heldout_metrics,
+        "experiments": experiments,
+        "traces": traces + heldout_traces,
+        "ledger": ledger,
+    }
+
+
+def _persist(output_dir: Path, run: dict[str, Any], traces: list[dict[str, Any]]) -> None:
+    with (output_dir / "run.json").open("w", encoding="utf-8") as handle:
+        json.dump(_json_safe(run), handle, indent=2, sort_keys=True, allow_nan=False)
+        handle.write("\n")
+    with (output_dir / "trace.jsonl").open("w", encoding="utf-8") as handle:
+        for event in traces:
+            handle.write(json.dumps(_json_safe(event), sort_keys=True, allow_nan=False) + "\n")
+
+
 def run_improvement(
     dataset: Dataset,
     executor: Executor,
@@ -147,121 +283,85 @@ def run_improvement(
     min_skill_gain: float = 0.002,
     max_coverage_regression: float = 0.05,
 ) -> dict[str, Any]:
+    splits = SplitSpec(
+        tuple(train_origins), (), tuple(heldout_origins), tuple(horizons), max(horizons)
+    ).validate()
     output_dir.mkdir(parents=True, exist_ok=True)
-    proposer = BoundedProposer(seed=seed)
-    incumbent = CandidateConfig(name="flat-last-value")
-    seen = {signature(incumbent)}
-    all_traces: list[dict[str, Any]] = []
-    experiments: list[dict[str, Any]] = []
-    lineage = [incumbent.candidate_id]
 
     print(f"data: {len(dataset.series)} series | sha256 {dataset.source_sha256[:12]}")
     print(f"backend: {executor.name} | train origins: {', '.join(train_origins)}")
-    incumbent_metrics, traces, _ = evaluate_candidate(
-        dataset, incumbent, train_origins, horizons, executor
+    search = run_search(
+        dataset,
+        executor,
+        splits,
+        BoundedProposer(seed=seed).propose,
+        generations,
+        candidates_per_generation,
+        min_skill_gain,
+        max_coverage_regression,
+        log=print,
     )
-    all_traces.extend(traces)
-    if not incumbent_metrics.valid:
-        raise RuntimeError(f"incumbent evaluation failed: {incumbent_metrics.violations[:3]}")
-    print(
-        f"incumbent {incumbent.candidate_id}: skill={incumbent_metrics.skill:.4f} "
-        f"coverage={incumbent_metrics.coverage_80:.3f}"
-    )
+    incumbent: CandidateConfig = search["champion"]
+    heldout_metrics: Metrics = search["heldout_metrics"]
+    all_traces: list[dict[str, Any]] = search["traces"]
+    contract = {
+        "train_origins": train_origins,
+        "heldout_origins": heldout_origins,
+        "cutoff": cutoff,
+        "horizons": horizons,
+        "generations": generations,
+        "candidates_per_generation": candidates_per_generation,
+        "min_skill_gain": min_skill_gain,
+        "max_coverage_regression": max_coverage_regression,
+        "heldout_used_for_selection": False,
+    }
+    prov = provenance()
+    run = {
+        "schema_version": 1,
+        "status": "heldout_complete_cutoff_pending",
+        "created_at_utc": datetime.now(UTC).isoformat(),
+        "git_commit": prov["git_commit"],
+        "provenance": prov,
+        "config_sha256": hashlib.sha256(canonical_json(_json_safe(contract)).encode()).hexdigest(),
+        "seed": seed,
+        "data": dataset.manifest(),
+        "executor_policy": executor.policy(),
+        "experiment_contract": contract,
+        "champion": incumbent.to_dict(),
+        "lineage": search["lineage"],
+        "train_metrics": search["train_metrics"].to_dict(),
+        "heldout_metrics": heldout_metrics.to_dict(),
+        "experiments": search["experiments"],
+        "ledger": search["ledger"],
+        "outputs": {"trace": "trace.jsonl"},
+    }
+    # Persist the already-computed held-out result before the cutoff forecast can fail.
+    _persist(output_dir, run, all_traces)
 
-    for generation in range(1, generations + 1):
-        proposals = proposer.propose(
-            incumbent,
-            generation,
-            candidates_per_generation,
-            seen,
+    try:
+        cutoff_result = executor.execute(
+            dataset.history_request(cutoff, horizons, incumbent.to_dict())
         )
-        eligible: list[tuple[CandidateConfig, Metrics]] = []
-        for candidate in proposals:
-            seen.add(signature(candidate))
-            metrics, traces, _ = evaluate_candidate(
-                dataset, candidate, train_origins, horizons, executor
-            )
-            all_traces.extend(traces)
-            reasons = promotion_reasons(
-                metrics,
-                incumbent_metrics,
-                min_skill_gain,
-                max_coverage_regression,
-            )
-            record = {
-                "generation": generation,
-                "candidate": candidate.to_dict(),
-                "train_metrics": metrics.to_dict(),
-                "promotion_gate": {"passed": not reasons, "reasons": reasons},
-            }
-            experiments.append(record)
-            status = "eligible" if not reasons else "rejected"
-            print(
-                f"g{generation} {candidate.candidate_id}: skill={metrics.skill:.4f} "
-                f"coverage={metrics.coverage_80:.3f} [{status}]"
-            )
-            if not reasons:
-                eligible.append((candidate, metrics))
-        if eligible:
-            incumbent, incumbent_metrics = min(eligible, key=lambda item: item[1].pinball)
-            lineage.append(incumbent.candidate_id)
-            print(f"promoted -> {incumbent.candidate_id}")
-        else:
-            print(f"generation {generation}: no promotion")
-
-    heldout_metrics, heldout_traces, _ = evaluate_candidate(
-        dataset, incumbent, heldout_origins, horizons, executor
-    )
-    all_traces.extend(heldout_traces)
-    cutoff_request = dataset.history_request(cutoff, horizons, incumbent.to_dict())
-    cutoff_result = executor.execute(cutoff_request)
+    except Exception as exc:
+        kind = exc.kind if isinstance(exc, ExecutionError) else FailureKind.INFRASTRUCTURE_FAILURE
+        run["status"], run["cutoff_failure_kind"] = "cutoff_forecast_failed", kind.value
+        _persist(output_dir, run, all_traces)
+        raise
     all_traces.append(
         {
             "event": "cutoff_forecast_completed",
             "candidate_id": incumbent.candidate_id,
             "origin": cutoff,
             "request_sha256": cutoff_result.request_sha256,
+            "response_sha256": cutoff_result.response_sha256,
             "backend": cutoff_result.backend,
             "duration_seconds": round(cutoff_result.duration_seconds, 6),
             "forecast_rows": len(cutoff_result.rows),
         }
     )
-
-    run = {
-        "schema_version": 1,
-        "created_at_utc": datetime.now(UTC).isoformat(),
-        "git_commit": _git_commit(),
-        "seed": seed,
-        "data": dataset.manifest(),
-        "executor_policy": executor.policy(),
-        "experiment_contract": {
-            "train_origins": train_origins,
-            "heldout_origins": heldout_origins,
-            "cutoff": cutoff,
-            "horizons": horizons,
-            "generations": generations,
-            "candidates_per_generation": candidates_per_generation,
-            "min_skill_gain": min_skill_gain,
-            "max_coverage_regression": max_coverage_regression,
-            "heldout_used_for_selection": False,
-        },
-        "champion": incumbent.to_dict(),
-        "lineage": lineage,
-        "train_metrics": incumbent_metrics.to_dict(),
-        "heldout_metrics": heldout_metrics.to_dict(),
-        "experiments": experiments,
-        "outputs": {
-            "forecast": f"forecast_{cutoff}.csv",
-            "trace": "trace.jsonl",
-        },
-    }
-    with (output_dir / "run.json").open("w", encoding="utf-8") as handle:
-        json.dump(_json_safe(run), handle, indent=2, sort_keys=True, allow_nan=False)
-        handle.write("\n")
-    with (output_dir / "trace.jsonl").open("w", encoding="utf-8") as handle:
-        for event in all_traces:
-            handle.write(json.dumps(_json_safe(event), sort_keys=True, allow_nan=False) + "\n")
+    run["status"], run["outputs"]["forecast"] = "complete", f"forecast_{cutoff}.csv"
     _write_forecast(output_dir / f"forecast_{cutoff}.csv", cutoff_result.rows, incumbent)
+    _persist(output_dir, run, all_traces)
     print(
         f"held-out: skill={heldout_metrics.skill:.4f} coverage={heldout_metrics.coverage_80:.3f} "
         f"cells={heldout_metrics.n_cells}"

@@ -45,6 +45,17 @@ gain over the incumbent, and bounded coverage regression. The loop stops after t
 configured generations or when no proposal passes. Held-out scoring occurs once at the
 end and cannot alter the champion.
 
+## Failure taxonomy and provenance
+
+Executors raise `ExecutionError` with one of `timeout`, `nonzero_exit`, `output_too_large`,
+`candidate_failure` or `infrastructure_failure`. A non-zero exit is rejected even when
+stdout holds valid JSON. Only the typed kind reaches proposer-visible state; raw stderr is
+never attached. `LocalExecutor` writes child output to size-limited temp files
+(`RLIMIT_FSIZE`) and adds a CPU limit, but is not a network or filesystem boundary — only
+the Modal backend is. Run records carry the git commit, dirty-tree hash, config and scorer
+SHA-256, and request/response SHA-256 per execution. A cutoff-forecast failure is persisted next to the
+already-computed held-out result instead of erasing it.
+
 ## Known limits
 
 The current candidate language is parameter search, not arbitrary self-editing code. That
