@@ -25,8 +25,10 @@ own promotion gate.
    the champion, fresh Modal sandboxes, rejected variants, and the promoted lineage.
 4. **1:05–1:30 — inspect one trace.** Truncated history goes in; forecasts come out; show
    blocked network, no secrets/volumes, gVisor, limits, and request/response hashes.
-5. **1:30–1:48 — recursive evidence.** Show equal-budget recursive versus fixed-anchor
-   control and the planted/null calibration. State exactly what it proves and does not.
+5. **1:30–1:48 — recursive evidence.** Show the preregistered real-data recursive versus
+   fixed-anchor result: +0.1698 versus +0.1435 held-out skill, 6/7 positive folds, exact
+   p=0.09375. State that it is corroborating, not conclusive; use planted/null calibration
+   to show that the harness can detect compounding without manufacturing null wins.
 6. **1:48–2:00 — decision.** “At a $33.6k reference capex, our base 3-year H100 NPV is
    $25.1k: rent, do not buy, unless delivered cost is under $25k or utilization is >80%.”
 
@@ -73,9 +75,12 @@ interval includes zero, so this is promising development evidence, not a conclus
 hidden-test claim.
 
 The recursion is testable too. Recursive and fixed-anchor control arms use the same mutation
-operator, seeds, and charged candidate-origin attempts. The only difference is whether a
-promotion becomes the next generation's parent. Synthetic planted effects compound; null
-studies do not create false wins. Real prospective confirmation remains future work.
+operator, seeds, seen set, and charged candidate-origin attempts. The only difference is
+whether a promotion becomes the next generation's parent. In our clean-preregistered
+real-data study, recursive inheritance averages +0.1698 held-out skill against +0.1435 for
+control: a +0.0263 paired gap, with six of seven fold means positive. The exact two-sided
+p-value is 0.09375, so this corroborates the hypothesis but does not conclusively confirm it.
+Synthetic planted effects compound, while 20 null studies produce no false positives.
 
 Finally, forecasting serves a decision. Using the pack's $33.6k H100 reference capex, our
 base 3-year discounted cash flow is $25.1k. So our answer is rent—not buy—at reference price;

@@ -59,3 +59,13 @@ Before any new real-data claim, pre-commit a fresh confirmation block and study 
 non-overlapping folds to assess recursive-minus-control uncertainty. If that interval includes
 zero, H1 remains unsupported and archive/code-patch work stays deferred.
 
+## Post-handoff extension
+
+Codex subsequently closed the deferred CLI and real-data gates without changing Claude's
+historical execution record above. `rsi-sandbox study` now consumes a strict JSON
+preregistration, preflights truth support before executor activity, and writes a canonical
+study artifact. The first committed specification failed on a real March–April data gap and
+is retained. A clean-commit V2 run over seven non-overlapping folds and two seeds produced a
++0.02633 recursive-minus-control held-out skill gap, with 6/7 positive fold means and exact
+two-sided p=0.09375. This is corroborating development evidence, not conclusive confirmation.
+

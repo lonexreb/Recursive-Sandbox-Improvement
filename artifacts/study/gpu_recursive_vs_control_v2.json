@@ -1,0 +1,2187 @@
+{
+  "analysis": {
+    "recursive_minus_control": {
+      "fold_means": [
+        0.023659766331700582,
+        0.05215289407954954,
+        0.007015935002045004,
+        0.10240699738533465,
+        0.004628893541408108,
+        -0.010106614294633331,
+        0.004548743395214883
+      ],
+      "mean": 0.026329516491517064,
+      "p_value_two_sided": 0.09375,
+      "test": "paired sign-flip over fold means"
+    },
+    "valid": true
+  },
+  "data": {
+    "cutoff": "2026-11-06",
+    "points": 54267,
+    "scope": "starter catalog tier=headline; catalog_sha256=1e06aaf4dd3b93ad6360478bc84e7f1cf37778529b303ef090b4f2eabc39ffac",
+    "series": 97,
+    "sha256": "a8dc0830ab395b40fdeced6677b4c71d2ea6d30933689ddb56f1761cf3dcd321",
+    "source": "series_daily.csv"
+  },
+  "executor_policy": {
+    "backend": "local-subprocess",
+    "cpu_limit_seconds": 60,
+    "fresh_process_per_candidate_origin": true,
+    "max_output_bytes": 5000000,
+    "network": "not blocked; use Modal for a security boundary",
+    "secrets": "minimal environment only",
+    "timeout_seconds": 60
+  },
+  "provenance": {
+    "git_commit": "7bf60d73888e26cf96abb81c44ffa152bf14d3a1",
+    "git_dirty": false,
+    "git_dirty_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "scorer_sha256": "472f6546e2c363778b89aa77284c8a4cf9e3fda5fb7cc0a4fa7d5a8b82a7ff22"
+  },
+  "records": [
+    {
+      "arm": "flat",
+      "champion": "flat-last-value-223ad40d188a",
+      "fold": 0,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.1035423859126984,
+        "coverage_80": 0.17063492063492064,
+        "mae_q50": 0.2070847718253968,
+        "n_cells": 252,
+        "pinball": 0.1035423859126984,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 7,
+      "trace_sha256": "cb83be6e1b54c2a4fd583c291c7e43a90f669e2f8228aeea1a318a81918c2ba5",
+      "train_metrics": {
+        "baseline_pinball": 0.533115414186508,
+        "coverage_80": 0.10714285714285714,
+        "mae_q50": 1.066230828373016,
+        "n_cells": 252,
+        "pinball": 0.533115414186508,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.0665883308531746,
+        "coverage_80": 0.1984126984126984,
+        "mae_q50": 0.1331766617063492,
+        "n_cells": 252,
+        "pinball": 0.0665883308531746,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "recursive",
+      "champion": "g2-proposal-2-826220b05306",
+      "fold": 0,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a",
+        "g1-proposal-3-53876cf641ef",
+        "g2-proposal-2-826220b05306"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.1035423859126984,
+        "coverage_80": 0.6547619047619048,
+        "mae_q50": 0.20033522958362993,
+        "n_cells": 252,
+        "pinball": 0.07365530427597192,
+        "skill": 0.2886458658768568,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 7,
+      "trace_sha256": "6485ded6f456d0b9a15eeb48ecdaecd136b908e36a3928cddf0cc79614cfbb04",
+      "train_metrics": {
+        "baseline_pinball": 0.533115414186508,
+        "coverage_80": 0.23809523809523808,
+        "mae_q50": 1.0694483529368515,
+        "n_cells": 252,
+        "pinball": 0.502020276327482,
+        "skill": 0.058327215892781226,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.0665883308531746,
+        "coverage_80": 0.7579365079365079,
+        "mae_q50": 0.13342895841381422,
+        "n_cells": 252,
+        "pinball": 0.05180708330591326,
+        "skill": 0.22197954743532433,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "control",
+      "champion": "g1-proposal-3-53876cf641ef",
+      "fold": 0,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 13,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a",
+        "g1-proposal-3-53876cf641ef"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.1035423859126984,
+        "coverage_80": 0.6111111111111112,
+        "mae_q50": 0.2070847718253968,
+        "n_cells": 252,
+        "pinball": 0.07855488158821433,
+        "skill": 0.24132633321345565,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 7,
+      "trace_sha256": "130bc8a273df92b8965924ae363a5c6c73f91cac6c2d98dae88979167311ba1d",
+      "train_metrics": {
+        "baseline_pinball": 0.533115414186508,
+        "coverage_80": 0.23809523809523808,
+        "mae_q50": 1.066230828373016,
+        "n_cells": 252,
+        "pinball": 0.5019153167237635,
+        "skill": 0.05852409559448457,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.0665883308531746,
+        "coverage_80": 0.7222222222222222,
+        "mae_q50": 0.1331766617063492,
+        "n_cells": 252,
+        "pinball": 0.053978267777036994,
+        "skill": 0.18937346701094582,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "flat",
+      "champion": "flat-last-value-223ad40d188a",
+      "fold": 0,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.1035423859126984,
+        "coverage_80": 0.17063492063492064,
+        "mae_q50": 0.2070847718253968,
+        "n_cells": 252,
+        "pinball": 0.1035423859126984,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 29,
+      "trace_sha256": "cb83be6e1b54c2a4fd583c291c7e43a90f669e2f8228aeea1a318a81918c2ba5",
+      "train_metrics": {
+        "baseline_pinball": 0.533115414186508,
+        "coverage_80": 0.10714285714285714,
+        "mae_q50": 1.066230828373016,
+        "n_cells": 252,
+        "pinball": 0.533115414186508,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.0665883308531746,
+        "coverage_80": 0.1984126984126984,
+        "mae_q50": 0.1331766617063492,
+        "n_cells": 252,
+        "pinball": 0.0665883308531746,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "recursive",
+      "champion": "g1-proposal-3-124b244e293a",
+      "fold": 0,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 13,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a",
+        "g1-proposal-3-124b244e293a"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.1035423859126984,
+        "coverage_80": 0.8333333333333334,
+        "mae_q50": 0.2070847718253968,
+        "n_cells": 252,
+        "pinball": 0.07297345808250595,
+        "skill": 0.29523105499970415,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 29,
+      "trace_sha256": "5f3de3a327d10c52abad44841a450b216c54956a5b8285bfcbadc490b044c296",
+      "train_metrics": {
+        "baseline_pinball": 0.533115414186508,
+        "coverage_80": 0.3611111111111111,
+        "mae_q50": 1.066230828373016,
+        "n_cells": 252,
+        "pinball": 0.4803335698742553,
+        "skill": 0.09900641194701454,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.0665883308531746,
+        "coverage_80": 0.8650793650793651,
+        "mae_q50": 0.1331766617063492,
+        "n_cells": 252,
+        "pinball": 0.05657473328481489,
+        "skill": 0.150380666402938,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "control",
+      "champion": "g1-proposal-3-124b244e293a",
+      "fold": 0,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 13,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a",
+        "g1-proposal-3-124b244e293a"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.1035423859126984,
+        "coverage_80": 0.8333333333333334,
+        "mae_q50": 0.2070847718253968,
+        "n_cells": 252,
+        "pinball": 0.07297345808250595,
+        "skill": 0.29523105499970415,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 29,
+      "trace_sha256": "0c9b3188bad304432b1f783999b3f7324c39c29ea87db63a11cd94d3007cdc6a",
+      "train_metrics": {
+        "baseline_pinball": 0.533115414186508,
+        "coverage_80": 0.3611111111111111,
+        "mae_q50": 1.066230828373016,
+        "n_cells": 252,
+        "pinball": 0.4803335698742553,
+        "skill": 0.09900641194701454,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.0665883308531746,
+        "coverage_80": 0.8650793650793651,
+        "mae_q50": 0.1331766617063492,
+        "n_cells": 252,
+        "pinball": 0.05657473328481489,
+        "skill": 0.150380666402938,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "flat",
+      "champion": "flat-last-value-223ad40d188a",
+      "fold": 1,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.05743588789682539,
+        "coverage_80": 0.17857142857142858,
+        "mae_q50": 0.1148717757936508,
+        "n_cells": 252,
+        "pinball": 0.05743588789682539,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 7,
+      "trace_sha256": "f2ac0b5f04277c86daeee8210297fed466e79e8387f9e268b11f6e80649bbd27",
+      "train_metrics": {
+        "baseline_pinball": 0.10963043154761903,
+        "coverage_80": 0.15873015873015872,
+        "mae_q50": 0.21926086309523807,
+        "n_cells": 252,
+        "pinball": 0.10963043154761903,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.06402244543650795,
+        "coverage_80": 0.14285714285714285,
+        "mae_q50": 0.1280448908730159,
+        "n_cells": 252,
+        "pinball": 0.06402244543650795,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "recursive",
+      "champion": "g2-proposal-2-826220b05306",
+      "fold": 1,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a",
+        "g1-proposal-3-53876cf641ef",
+        "g2-proposal-2-826220b05306"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.05743588789682539,
+        "coverage_80": 0.7301587301587301,
+        "mae_q50": 0.11244358735399677,
+        "n_cells": 252,
+        "pinball": 0.04235122657324255,
+        "skill": 0.26263477202058894,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 7,
+      "trace_sha256": "a7a4132d4155f8e5e88ab9d6e09be9f22f92952ab16ddd2978afb62e077dafb1",
+      "train_metrics": {
+        "baseline_pinball": 0.10963043154761903,
+        "coverage_80": 0.6190476190476191,
+        "mae_q50": 0.2116820163450392,
+        "n_cells": 252,
+        "pinball": 0.07769560859862103,
+        "skill": 0.2912952407300049,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.06402244543650795,
+        "coverage_80": 0.746031746031746,
+        "mae_q50": 0.12471469371732288,
+        "n_cells": 252,
+        "pinball": 0.04624281207634031,
+        "skill": 0.2777093758125809,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "control",
+      "champion": "g1-proposal-3-53876cf641ef",
+      "fold": 1,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a",
+        "g1-proposal-3-53876cf641ef"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.05743588789682539,
+        "coverage_80": 0.7063492063492064,
+        "mae_q50": 0.1148717757936508,
+        "n_cells": 252,
+        "pinball": 0.04834212212893858,
+        "skill": 0.15832898386148986,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 7,
+      "trace_sha256": "1ae2a5cd1726e5cb1a8ae11c2ad7c4f1680fd46b5d279dd631af1d096c3b026c",
+      "train_metrics": {
+        "baseline_pinball": 0.10963043154761903,
+        "coverage_80": 0.5674603174603174,
+        "mae_q50": 0.21926086309523807,
+        "n_cells": 252,
+        "pinball": 0.08261821518242951,
+        "skill": 0.24639341452794072,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.06402244543650795,
+        "coverage_80": 0.7103174603174603,
+        "mae_q50": 0.1280448908730159,
+        "n_cells": 252,
+        "pinball": 0.05247877286316341,
+        "skill": 0.1803066486236078,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "flat",
+      "champion": "flat-last-value-223ad40d188a",
+      "fold": 1,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.05743588789682539,
+        "coverage_80": 0.17857142857142858,
+        "mae_q50": 0.1148717757936508,
+        "n_cells": 252,
+        "pinball": 0.05743588789682539,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 29,
+      "trace_sha256": "f2ac0b5f04277c86daeee8210297fed466e79e8387f9e268b11f6e80649bbd27",
+      "train_metrics": {
+        "baseline_pinball": 0.10963043154761903,
+        "coverage_80": 0.15873015873015872,
+        "mae_q50": 0.21926086309523807,
+        "n_cells": 252,
+        "pinball": 0.10963043154761903,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.06402244543650795,
+        "coverage_80": 0.14285714285714285,
+        "mae_q50": 0.1280448908730159,
+        "n_cells": 252,
+        "pinball": 0.06402244543650795,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "recursive",
+      "champion": "g1-proposal-3-124b244e293a",
+      "fold": 1,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a",
+        "g1-proposal-3-124b244e293a"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.05743588789682539,
+        "coverage_80": 0.876984126984127,
+        "mae_q50": 0.1148717757936508,
+        "n_cells": 252,
+        "pinball": 0.051888405399297545,
+        "skill": 0.09658564881060139,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 29,
+      "trace_sha256": "f7bf25c41cedfa42bd9543b575214443476ae7435ac813959a70892749ec0cea",
+      "train_metrics": {
+        "baseline_pinball": 0.10963043154761903,
+        "coverage_80": 0.8134920634920635,
+        "mae_q50": 0.21926086309523807,
+        "n_cells": 252,
+        "pinball": 0.07552857574526455,
+        "skill": 0.31106194987057056,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.06402244543650795,
+        "coverage_80": 0.8690476190476191,
+        "mae_q50": 0.1280448908730159,
+        "n_cells": 252,
+        "pinball": 0.05517267661007741,
+        "skill": 0.13822915957196602,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "control",
+      "champion": "g1-proposal-3-124b244e293a",
+      "fold": 1,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a",
+        "g1-proposal-3-124b244e293a"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.05743588789682539,
+        "coverage_80": 0.876984126984127,
+        "mae_q50": 0.1148717757936508,
+        "n_cells": 252,
+        "pinball": 0.051888405399297545,
+        "skill": 0.09658564881060139,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 29,
+      "trace_sha256": "5168bfe50d9252eefc4cd64a46d60b4fdcaa352eaeb33e7ef5b67f1d7f0ffc8f",
+      "train_metrics": {
+        "baseline_pinball": 0.10963043154761903,
+        "coverage_80": 0.8134920634920635,
+        "mae_q50": 0.21926086309523807,
+        "n_cells": 252,
+        "pinball": 0.07552857574526455,
+        "skill": 0.31106194987057056,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.06402244543650795,
+        "coverage_80": 0.8690476190476191,
+        "mae_q50": 0.1280448908730159,
+        "n_cells": 252,
+        "pinball": 0.05517267661007741,
+        "skill": 0.13822915957196602,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "flat",
+      "champion": "flat-last-value-223ad40d188a",
+      "fold": 2,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.06878175472508592,
+        "coverage_80": 0.18900343642611683,
+        "mae_q50": 0.13756350945017182,
+        "n_cells": 291,
+        "pinball": 0.06878175472508592,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 7,
+      "trace_sha256": "558023b794651df7807cf52229e6b69e15fab2e85d5f2b02f9c31f0ba8fd27d2",
+      "train_metrics": {
+        "baseline_pinball": 0.056208978174603186,
+        "coverage_80": 0.18253968253968253,
+        "mae_q50": 0.11241795634920637,
+        "n_cells": 252,
+        "pinball": 0.056208978174603186,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.04827481743986254,
+        "coverage_80": 0.20962199312714777,
+        "mae_q50": 0.09654963487972508,
+        "n_cells": 291,
+        "pinball": 0.04827481743986254,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "recursive",
+      "champion": "g2-proposal-2-826220b05306",
+      "fold": 2,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a",
+        "g1-proposal-3-53876cf641ef",
+        "g2-proposal-2-826220b05306"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.06878175472508592,
+        "coverage_80": 0.6941580756013745,
+        "mae_q50": 0.14260009639256502,
+        "n_cells": 291,
+        "pinball": 0.0545541507567576,
+        "skill": 0.2068514248465264,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 7,
+      "trace_sha256": "e39d8d86f23f1a14304975d5bfc382390cf73eb766f5fd4b0da6f37a6faeccd7",
+      "train_metrics": {
+        "baseline_pinball": 0.056208978174603186,
+        "coverage_80": 0.746031746031746,
+        "mae_q50": 0.11258751541742394,
+        "n_cells": 252,
+        "pinball": 0.04211456367410429,
+        "skill": 0.25075023525097906,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.04827481743986254,
+        "coverage_80": 0.7457044673539519,
+        "mae_q50": 0.09582576206883435,
+        "n_cells": 291,
+        "pinball": 0.03513420573269201,
+        "skill": 0.27220427552191573,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "control",
+      "champion": "g2-proposal-1-a6273ee18edc",
+      "fold": 2,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a",
+        "g1-proposal-3-53876cf641ef",
+        "g2-proposal-1-a6273ee18edc"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.06878175472508592,
+        "coverage_80": 0.6013745704467354,
+        "mae_q50": 0.13756350945017182,
+        "n_cells": 291,
+        "pinball": 0.05235966732549098,
+        "skill": 0.23875644733450685,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 7,
+      "trace_sha256": "fbb78548b83fc85c1a2070d8da225ba453e756f763cae82a04831ac1f3e44e7f",
+      "train_metrics": {
+        "baseline_pinball": 0.056208978174603186,
+        "coverage_80": 0.6547619047619048,
+        "mae_q50": 0.11241795634920637,
+        "n_cells": 252,
+        "pinball": 0.04629615879170014,
+        "skill": 0.17635651287078435,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.04827481743986254,
+        "coverage_80": 0.7079037800687286,
+        "mae_q50": 0.09654963487972508,
+        "n_cells": 291,
+        "pinball": 0.03839978605620389,
+        "skill": 0.20455864791120737,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "flat",
+      "champion": "flat-last-value-223ad40d188a",
+      "fold": 2,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.06878175472508592,
+        "coverage_80": 0.18900343642611683,
+        "mae_q50": 0.13756350945017182,
+        "n_cells": 291,
+        "pinball": 0.06878175472508592,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 29,
+      "trace_sha256": "558023b794651df7807cf52229e6b69e15fab2e85d5f2b02f9c31f0ba8fd27d2",
+      "train_metrics": {
+        "baseline_pinball": 0.056208978174603186,
+        "coverage_80": 0.18253968253968253,
+        "mae_q50": 0.11241795634920637,
+        "n_cells": 252,
+        "pinball": 0.056208978174603186,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.04827481743986254,
+        "coverage_80": 0.20962199312714777,
+        "mae_q50": 0.09654963487972508,
+        "n_cells": 291,
+        "pinball": 0.04827481743986254,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "recursive",
+      "champion": "g2-proposal-3-d093fa1747b1",
+      "fold": 2,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a",
+        "g1-proposal-3-124b244e293a",
+        "g2-proposal-3-d093fa1747b1"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.06878175472508592,
+        "coverage_80": 0.8350515463917526,
+        "mae_q50": 0.13756350945017182,
+        "n_cells": 291,
+        "pinball": 0.05119131847345249,
+        "skill": 0.2557427666964984,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 29,
+      "trace_sha256": "d54c8bd8fddb6dab808fd2c444a17431aa15c118c859ef876827c5bd7ca241a4",
+      "train_metrics": {
+        "baseline_pinball": 0.056208978174603186,
+        "coverage_80": 0.8492063492063492,
+        "mae_q50": 0.11241795634920637,
+        "n_cells": 252,
+        "pinball": 0.04735430089977584,
+        "skill": 0.15753136887352526,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.04827481743986254,
+        "coverage_80": 0.8797250859106529,
+        "mae_q50": 0.09654963487972508,
+        "n_cells": 291,
+        "pinball": 0.0399151370223875,
+        "skill": 0.17316855579804025,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "control",
+      "champion": "g1-proposal-3-124b244e293a",
+      "fold": 2,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a",
+        "g1-proposal-3-124b244e293a"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.06878175472508592,
+        "coverage_80": 0.8625429553264605,
+        "mae_q50": 0.13756350945017182,
+        "n_cells": 291,
+        "pinball": 0.05435093854567473,
+        "skill": 0.20980587420442798,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 29,
+      "trace_sha256": "edab0b6fc750fc5a6a9070567e9aec8309913a13dd1355b1438890bbf3228a6f",
+      "train_metrics": {
+        "baseline_pinball": 0.056208978174603186,
+        "coverage_80": 0.8809523809523809,
+        "mae_q50": 0.11241795634920637,
+        "n_cells": 252,
+        "pinball": 0.051893443799505175,
+        "skill": 0.0767766025152169,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.04827481743986254,
+        "coverage_80": 0.8556701030927835,
+        "mae_q50": 0.09654963487972508,
+        "n_cells": 291,
+        "pinball": 0.04377484772741769,
+        "skill": 0.09321567539951048,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "flat",
+      "champion": "flat-last-value-223ad40d188a",
+      "fold": 3,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.04067545103092783,
+        "coverage_80": 0.21649484536082475,
+        "mae_q50": 0.08135090206185566,
+        "n_cells": 291,
+        "pinball": 0.04067545103092783,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 7,
+      "trace_sha256": "25afa6c67a2b97c71850ce47bdb58e02f2aa5bb74397396aba5a6e8b79b2d480",
+      "train_metrics": {
+        "baseline_pinball": 0.07461399269759451,
+        "coverage_80": 0.17525773195876287,
+        "mae_q50": 0.14922798539518903,
+        "n_cells": 291,
+        "pinball": 0.07461399269759451,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.054963326890034366,
+        "coverage_80": 0.16494845360824742,
+        "mae_q50": 0.10992665378006873,
+        "n_cells": 291,
+        "pinball": 0.054963326890034366,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "recursive",
+      "champion": "g2-proposal-2-826220b05306",
+      "fold": 3,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a",
+        "g1-proposal-3-53876cf641ef",
+        "g2-proposal-2-826220b05306"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.04067545103092783,
+        "coverage_80": 0.852233676975945,
+        "mae_q50": 0.08822928924536015,
+        "n_cells": 291,
+        "pinball": 0.030563101487966687,
+        "skill": 0.24861063090049462,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 7,
+      "trace_sha256": "7ff0029ffe8ea7e104e56f5b6c715811378145c9684592f706b0bdcf444033a0",
+      "train_metrics": {
+        "baseline_pinball": 0.07461399269759451,
+        "coverage_80": 0.6838487972508591,
+        "mae_q50": 0.15349062945532052,
+        "n_cells": 291,
+        "pinball": 0.05942411112135104,
+        "skill": 0.2035795301533727,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.054963326890034366,
+        "coverage_80": 0.7697594501718213,
+        "mae_q50": 0.11433265006542198,
+        "n_cells": 291,
+        "pinball": 0.03993254056183618,
+        "skill": 0.2734693690989707,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "control",
+      "champion": "g1-proposal-3-53876cf641ef",
+      "fold": 3,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a",
+        "g1-proposal-3-53876cf641ef"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.04067545103092783,
+        "coverage_80": 0.8144329896907216,
+        "mae_q50": 0.08135090206185566,
+        "n_cells": 291,
+        "pinball": 0.034880855614268215,
+        "skill": 0.14245927874908282,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 7,
+      "trace_sha256": "22712e2009b720e97879c5ea5f690409e2e4148a6e804c8c48131072548a8a34",
+      "train_metrics": {
+        "baseline_pinball": 0.07461399269759451,
+        "coverage_80": 0.6872852233676976,
+        "mae_q50": 0.14922798539518903,
+        "n_cells": 291,
+        "pinball": 0.061014914657860686,
+        "skill": 0.18225908503315158,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.054963326890034366,
+        "coverage_80": 0.7800687285223368,
+        "mae_q50": 0.10992665378006873,
+        "n_cells": 291,
+        "pinball": 0.042591298688181754,
+        "skill": 0.22509605771509145,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "flat",
+      "champion": "flat-last-value-223ad40d188a",
+      "fold": 3,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.04067545103092783,
+        "coverage_80": 0.21649484536082475,
+        "mae_q50": 0.08135090206185566,
+        "n_cells": 291,
+        "pinball": 0.04067545103092783,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 29,
+      "trace_sha256": "25afa6c67a2b97c71850ce47bdb58e02f2aa5bb74397396aba5a6e8b79b2d480",
+      "train_metrics": {
+        "baseline_pinball": 0.07461399269759451,
+        "coverage_80": 0.17525773195876287,
+        "mae_q50": 0.14922798539518903,
+        "n_cells": 291,
+        "pinball": 0.07461399269759451,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.054963326890034366,
+        "coverage_80": 0.16494845360824742,
+        "mae_q50": 0.10992665378006873,
+        "n_cells": 291,
+        "pinball": 0.054963326890034366,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "recursive",
+      "champion": "g2-proposal-3-d093fa1747b1",
+      "fold": 3,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a",
+        "g1-proposal-3-124b244e293a",
+        "g2-proposal-3-d093fa1747b1"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.04067545103092783,
+        "coverage_80": 0.9450171821305842,
+        "mae_q50": 0.08135090206185566,
+        "n_cells": 291,
+        "pinball": 0.03720247670645251,
+        "skill": 0.08538256458015969,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 29,
+      "trace_sha256": "fabb420baf748abf857a39bcf2c3f2f5a024bf23543a11ad3a3801eb475cdc39",
+      "train_metrics": {
+        "baseline_pinball": 0.07461399269759451,
+        "coverage_80": 0.8247422680412371,
+        "mae_q50": 0.14922798539518903,
+        "n_cells": 291,
+        "pinball": 0.055454609760348335,
+        "skill": 0.2567800253619702,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.054963326890034366,
+        "coverage_80": 0.9106529209621993,
+        "mae_q50": 0.10992665378006873,
+        "n_cells": 291,
+        "pinball": 0.04128028477310964,
+        "skill": 0.24894857882785215,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "control",
+      "champion": "g1-proposal-3-124b244e293a",
+      "fold": 3,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a",
+        "g1-proposal-3-124b244e293a"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.04067545103092783,
+        "coverage_80": 0.9243986254295533,
+        "mae_q50": 0.08135090206185566,
+        "n_cells": 291,
+        "pinball": 0.04121562419489406,
+        "skill": -0.013280078039097809,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 29,
+      "trace_sha256": "e332f81895b982667a405783bb9fd99cd98e58860ca70459c9195d0c89492698",
+      "train_metrics": {
+        "baseline_pinball": 0.07461399269759451,
+        "coverage_80": 0.8625429553264605,
+        "mae_q50": 0.14922798539518903,
+        "n_cells": 291,
+        "pinball": 0.05871080631707725,
+        "skill": 0.21313946359862834,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.054963326890034366,
+        "coverage_80": 0.9450171821305842,
+        "mae_q50": 0.10992665378006873,
+        "n_cells": 291,
+        "pinball": 0.04679846625631207,
+        "skill": 0.14855106296709086,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "flat",
+      "champion": "flat-last-value-223ad40d188a",
+      "fold": 4,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.026751879295532664,
+        "coverage_80": 0.23367697594501718,
+        "mae_q50": 0.05350375859106533,
+        "n_cells": 291,
+        "pinball": 0.026751879295532664,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 7,
+      "trace_sha256": "b035fcfe238f2d385f82d61fe91a70152d4cbb569abb634bb9d07a2a6d16ea0b",
+      "train_metrics": {
+        "baseline_pinball": 0.04373963702749141,
+        "coverage_80": 0.20618556701030927,
+        "mae_q50": 0.08747927405498282,
+        "n_cells": 291,
+        "pinball": 0.04373963702749141,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.04368142182130584,
+        "coverage_80": 0.27147766323024053,
+        "mae_q50": 0.08736284364261168,
+        "n_cells": 291,
+        "pinball": 0.04368142182130584,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "recursive",
+      "champion": "g2-proposal-2-826220b05306",
+      "fold": 4,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a",
+        "g1-proposal-3-53876cf641ef",
+        "g2-proposal-2-826220b05306"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.026751879295532664,
+        "coverage_80": 0.8144329896907216,
+        "mae_q50": 0.05468197806806748,
+        "n_cells": 291,
+        "pinball": 0.026123709670725033,
+        "skill": 0.023481326970271166,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 7,
+      "trace_sha256": "8b69de18543a778b3cecfb407af144365257208a57e75be551c9cf8d84826f89",
+      "train_metrics": {
+        "baseline_pinball": 0.04373963702749141,
+        "coverage_80": 0.8316151202749141,
+        "mae_q50": 0.09359143848638013,
+        "n_cells": 291,
+        "pinball": 0.03245882075124242,
+        "skill": 0.2579083193845144,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.04368142182130584,
+        "coverage_80": 0.8350515463917526,
+        "mae_q50": 0.09175174025851501,
+        "n_cells": 291,
+        "pinball": 0.034150995970321195,
+        "skill": 0.2181803030581786,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "control",
+      "champion": "g2-proposal-1-a6273ee18edc",
+      "fold": 4,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a",
+        "g1-proposal-3-53876cf641ef",
+        "g2-proposal-1-a6273ee18edc"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.026751879295532664,
+        "coverage_80": 0.7697594501718213,
+        "mae_q50": 0.05350375859106533,
+        "n_cells": 291,
+        "pinball": 0.026371372873308273,
+        "skill": 0.01422353988745495,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 7,
+      "trace_sha256": "a64be4124791ed4c7fe2b426a61898e47bba43028433af1609484be9d8580836",
+      "train_metrics": {
+        "baseline_pinball": 0.04373963702749141,
+        "coverage_80": 0.8178694158075601,
+        "mae_q50": 0.08747927405498282,
+        "n_cells": 291,
+        "pinball": 0.030769275506207755,
+        "skill": 0.29653564598927673,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.04368142182130584,
+        "coverage_80": 0.8109965635738832,
+        "mae_q50": 0.08736284364261168,
+        "n_cells": 291,
+        "pinball": 0.03450224225472871,
+        "skill": 0.2101392121375485,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "flat",
+      "champion": "flat-last-value-223ad40d188a",
+      "fold": 4,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.026751879295532664,
+        "coverage_80": 0.23367697594501718,
+        "mae_q50": 0.05350375859106533,
+        "n_cells": 291,
+        "pinball": 0.026751879295532664,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 29,
+      "trace_sha256": "b035fcfe238f2d385f82d61fe91a70152d4cbb569abb634bb9d07a2a6d16ea0b",
+      "train_metrics": {
+        "baseline_pinball": 0.04373963702749141,
+        "coverage_80": 0.20618556701030927,
+        "mae_q50": 0.08747927405498282,
+        "n_cells": 291,
+        "pinball": 0.04373963702749141,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.04368142182130584,
+        "coverage_80": 0.27147766323024053,
+        "mae_q50": 0.08736284364261168,
+        "n_cells": 291,
+        "pinball": 0.04368142182130584,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "recursive",
+      "champion": "flat-last-value-223ad40d188a",
+      "fold": 4,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.026751879295532664,
+        "coverage_80": 0.23367697594501718,
+        "mae_q50": 0.05350375859106533,
+        "n_cells": 291,
+        "pinball": 0.026751879295532664,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 29,
+      "trace_sha256": "efd797b5c799e54d3de220c29330dc6be5be176a7bb9ea3fc4e0de3d98931211",
+      "train_metrics": {
+        "baseline_pinball": 0.04373963702749141,
+        "coverage_80": 0.20618556701030927,
+        "mae_q50": 0.08747927405498282,
+        "n_cells": 291,
+        "pinball": 0.04373963702749141,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.04368142182130584,
+        "coverage_80": 0.27147766323024053,
+        "mae_q50": 0.08736284364261168,
+        "n_cells": 291,
+        "pinball": 0.04368142182130584,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "control",
+      "champion": "flat-last-value-223ad40d188a",
+      "fold": 4,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.026751879295532664,
+        "coverage_80": 0.23367697594501718,
+        "mae_q50": 0.05350375859106533,
+        "n_cells": 291,
+        "pinball": 0.026751879295532664,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 29,
+      "trace_sha256": "efd797b5c799e54d3de220c29330dc6be5be176a7bb9ea3fc4e0de3d98931211",
+      "train_metrics": {
+        "baseline_pinball": 0.04373963702749141,
+        "coverage_80": 0.20618556701030927,
+        "mae_q50": 0.08747927405498282,
+        "n_cells": 291,
+        "pinball": 0.04373963702749141,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.04368142182130584,
+        "coverage_80": 0.27147766323024053,
+        "mae_q50": 0.08736284364261168,
+        "n_cells": 291,
+        "pinball": 0.04368142182130584,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "flat",
+      "champion": "flat-last-value-223ad40d188a",
+      "fold": 5,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.08801436855670103,
+        "coverage_80": 0.16151202749140894,
+        "mae_q50": 0.17602873711340206,
+        "n_cells": 291,
+        "pinball": 0.08801436855670103,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 7,
+      "trace_sha256": "d47e512376de2d6e9aaa7804fd866d16a8eebfd26e040b80c1b09e93d35b2f67",
+      "train_metrics": {
+        "baseline_pinball": 0.02548274269759451,
+        "coverage_80": 0.21993127147766323,
+        "mae_q50": 0.05096548539518902,
+        "n_cells": 291,
+        "pinball": 0.02548274269759451,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.034115625,
+        "coverage_80": 0.24054982817869416,
+        "mae_q50": 0.06823125,
+        "n_cells": 291,
+        "pinball": 0.034115625,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "recursive",
+      "champion": "g2-proposal-2-826220b05306",
+      "fold": 5,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a",
+        "g1-proposal-3-53876cf641ef",
+        "g2-proposal-2-826220b05306"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.08801436855670103,
+        "coverage_80": 0.584192439862543,
+        "mae_q50": 0.18020107685360184,
+        "n_cells": 291,
+        "pinball": 0.07084124474470077,
+        "skill": 0.19511727566319936,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 7,
+      "trace_sha256": "8507c28813ac4e82cc1d3ef5ac0a9a474e2b75a72768918afb591b5694f49226",
+      "train_metrics": {
+        "baseline_pinball": 0.02548274269759451,
+        "coverage_80": 0.8109965635738832,
+        "mae_q50": 0.05322866161012625,
+        "n_cells": 291,
+        "pinball": 0.025663811242742404,
+        "skill": -0.007105535981611011,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.034115625,
+        "coverage_80": 0.7835051546391752,
+        "mae_q50": 0.07435498856880127,
+        "n_cells": 291,
+        "pinball": 0.02863117727784769,
+        "skill": 0.16076058176135732,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "control",
+      "champion": "g1-proposal-3-53876cf641ef",
+      "fold": 5,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a",
+        "g1-proposal-3-53876cf641ef"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.08801436855670103,
+        "coverage_80": 0.6048109965635738,
+        "mae_q50": 0.17602873711340206,
+        "n_cells": 291,
+        "pinball": 0.0690621901939242,
+        "skill": 0.21533050425246603,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 7,
+      "trace_sha256": "5b4585150097bf3090c3f43fb43546945d8b81d7f19d3c60b441a340d527660c",
+      "train_metrics": {
+        "baseline_pinball": 0.02548274269759451,
+        "coverage_80": 0.7800687285223368,
+        "mae_q50": 0.05096548539518902,
+        "n_cells": 291,
+        "pinball": 0.02765148035069344,
+        "skill": -0.08510613158228253,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.034115625,
+        "coverage_80": 0.7766323024054983,
+        "mae_q50": 0.06823125,
+        "n_cells": 291,
+        "pinball": 0.03133849936091399,
+        "skill": 0.08140333466222605,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "flat",
+      "champion": "flat-last-value-223ad40d188a",
+      "fold": 5,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.08801436855670103,
+        "coverage_80": 0.16151202749140894,
+        "mae_q50": 0.17602873711340206,
+        "n_cells": 291,
+        "pinball": 0.08801436855670103,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 29,
+      "trace_sha256": "d47e512376de2d6e9aaa7804fd866d16a8eebfd26e040b80c1b09e93d35b2f67",
+      "train_metrics": {
+        "baseline_pinball": 0.02548274269759451,
+        "coverage_80": 0.21993127147766323,
+        "mae_q50": 0.05096548539518902,
+        "n_cells": 291,
+        "pinball": 0.02548274269759451,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.034115625,
+        "coverage_80": 0.24054982817869416,
+        "mae_q50": 0.06823125,
+        "n_cells": 291,
+        "pinball": 0.034115625,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "recursive",
+      "champion": "flat-last-value-223ad40d188a",
+      "fold": 5,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.08801436855670103,
+        "coverage_80": 0.16151202749140894,
+        "mae_q50": 0.17602873711340206,
+        "n_cells": 291,
+        "pinball": 0.08801436855670103,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 29,
+      "trace_sha256": "c54c45d361ad12b4be92310d667204620c526956345711ba469a804e79c0fe41",
+      "train_metrics": {
+        "baseline_pinball": 0.02548274269759451,
+        "coverage_80": 0.21993127147766323,
+        "mae_q50": 0.05096548539518902,
+        "n_cells": 291,
+        "pinball": 0.02548274269759451,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.034115625,
+        "coverage_80": 0.24054982817869416,
+        "mae_q50": 0.06823125,
+        "n_cells": 291,
+        "pinball": 0.034115625,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "control",
+      "champion": "flat-last-value-223ad40d188a",
+      "fold": 5,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.08801436855670103,
+        "coverage_80": 0.16151202749140894,
+        "mae_q50": 0.17602873711340206,
+        "n_cells": 291,
+        "pinball": 0.08801436855670103,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 29,
+      "trace_sha256": "c54c45d361ad12b4be92310d667204620c526956345711ba469a804e79c0fe41",
+      "train_metrics": {
+        "baseline_pinball": 0.02548274269759451,
+        "coverage_80": 0.21993127147766323,
+        "mae_q50": 0.05096548539518902,
+        "n_cells": 291,
+        "pinball": 0.02548274269759451,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.034115625,
+        "coverage_80": 0.24054982817869416,
+        "mae_q50": 0.06823125,
+        "n_cells": 291,
+        "pinball": 0.034115625,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "flat",
+      "champion": "flat-last-value-223ad40d188a",
+      "fold": 6,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.0744761490549828,
+        "coverage_80": 0.13402061855670103,
+        "mae_q50": 0.1489522981099656,
+        "n_cells": 291,
+        "pinball": 0.0744761490549828,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 7,
+      "trace_sha256": "389595b6b358c5e5fac99c7fc5a9c81e474313d0a8266067ea23af25eb1e0cd0",
+      "train_metrics": {
+        "baseline_pinball": 0.10381913659793814,
+        "coverage_80": 0.15807560137457044,
+        "mae_q50": 0.20763827319587627,
+        "n_cells": 291,
+        "pinball": 0.10381913659793814,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.10332461340206187,
+        "coverage_80": 0.14776632302405499,
+        "mae_q50": 0.20664922680412373,
+        "n_cells": 291,
+        "pinball": 0.10332461340206187,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "recursive",
+      "champion": "g2-proposal-1-717d5e7f78f5",
+      "fold": 6,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a",
+        "g1-proposal-3-53876cf641ef",
+        "g2-proposal-1-717d5e7f78f5"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.0744761490549828,
+        "coverage_80": 0.7422680412371134,
+        "mae_q50": 0.1489522981099656,
+        "n_cells": 291,
+        "pinball": 0.056498380869797866,
+        "skill": 0.24138960477014804,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 7,
+      "trace_sha256": "d756eb8b131ed184597f20baa3ac53a1ff4ff1924a11d470caef76996846b87a",
+      "train_metrics": {
+        "baseline_pinball": 0.10381913659793814,
+        "coverage_80": 0.6391752577319587,
+        "mae_q50": 0.20763827319587627,
+        "n_cells": 291,
+        "pinball": 0.0801401895907087,
+        "skill": 0.22807882807705515,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.10332461340206187,
+        "coverage_80": 0.6048109965635738,
+        "mae_q50": 0.20664922680412373,
+        "n_cells": 291,
+        "pinball": 0.0728033122454125,
+        "skill": 0.29539235765522154,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "control",
+      "champion": "g1-proposal-3-53876cf641ef",
+      "fold": 6,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a",
+        "g1-proposal-3-53876cf641ef"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.0744761490549828,
+        "coverage_80": 0.6701030927835051,
+        "mae_q50": 0.1489522981099656,
+        "n_cells": 291,
+        "pinball": 0.057175926652027656,
+        "skill": 0.23229211797971827,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 7,
+      "trace_sha256": "cd0efb913daad26da38dcc3c33755a82245f9ebd0a824461284ceecef7e31998",
+      "train_metrics": {
+        "baseline_pinball": 0.10381913659793814,
+        "coverage_80": 0.5945017182130584,
+        "mae_q50": 0.20763827319587627,
+        "n_cells": 291,
+        "pinball": 0.08340514838241238,
+        "skill": 0.19663030231683876,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.10332461340206187,
+        "coverage_80": 0.5463917525773195,
+        "mae_q50": 0.20664922680412373,
+        "n_cells": 291,
+        "pinball": 0.07753633849955732,
+        "skill": 0.2495850122579789,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "flat",
+      "champion": "flat-last-value-223ad40d188a",
+      "fold": 6,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.0744761490549828,
+        "coverage_80": 0.13402061855670103,
+        "mae_q50": 0.1489522981099656,
+        "n_cells": 291,
+        "pinball": 0.0744761490549828,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 29,
+      "trace_sha256": "389595b6b358c5e5fac99c7fc5a9c81e474313d0a8266067ea23af25eb1e0cd0",
+      "train_metrics": {
+        "baseline_pinball": 0.10381913659793814,
+        "coverage_80": 0.15807560137457044,
+        "mae_q50": 0.20763827319587627,
+        "n_cells": 291,
+        "pinball": 0.10381913659793814,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.10332461340206187,
+        "coverage_80": 0.14776632302405499,
+        "mae_q50": 0.20664922680412373,
+        "n_cells": 291,
+        "pinball": 0.10332461340206187,
+        "skill": 0.0,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "recursive",
+      "champion": "g1-proposal-3-124b244e293a",
+      "fold": 6,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a",
+        "g1-proposal-3-124b244e293a"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.0744761490549828,
+        "coverage_80": 0.8831615120274914,
+        "mae_q50": 0.1489522981099656,
+        "n_cells": 291,
+        "pinball": 0.06124537759359176,
+        "skill": 0.17765112226228674,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 29,
+      "trace_sha256": "e18da2c6c86279931d3f37313e8e56a59e346285441e3d51a67cfac7c4cb921b",
+      "train_metrics": {
+        "baseline_pinball": 0.10381913659793814,
+        "coverage_80": 0.7663230240549829,
+        "mae_q50": 0.20763827319587627,
+        "n_cells": 291,
+        "pinball": 0.07856888977300237,
+        "skill": 0.24321380096544976,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.10332461340206187,
+        "coverage_80": 0.8109965635738832,
+        "mae_q50": 0.20664922680412373,
+        "n_cells": 291,
+        "pinball": 0.07005982610142626,
+        "skill": 0.3219444642022904,
+        "valid": true,
+        "violations": []
+      }
+    },
+    {
+      "arm": "control",
+      "champion": "g1-proposal-3-124b244e293a",
+      "fold": 6,
+      "ledger": {
+        "charged_attempts": 14,
+        "executed_attempts": 14,
+        "failures": {},
+        "heldout_attempts": 1,
+        "infra_retries": 0
+      },
+      "lineage": [
+        "flat-last-value-223ad40d188a",
+        "g1-proposal-3-124b244e293a"
+      ],
+      "sealed_heldout": {
+        "baseline_pinball": 0.0744761490549828,
+        "coverage_80": 0.8831615120274914,
+        "mae_q50": 0.1489522981099656,
+        "n_cells": 291,
+        "pinball": 0.06124537759359176,
+        "skill": 0.17765112226228674,
+        "valid": true,
+        "violations": []
+      },
+      "seed": 29,
+      "trace_sha256": "7262726efcf7be56e4d8730b8e2429efbecd94530c11be7bd9a4df2b98ab9a57",
+      "train_metrics": {
+        "baseline_pinball": 0.10381913659793814,
+        "coverage_80": 0.7663230240549829,
+        "mae_q50": 0.20763827319587627,
+        "n_cells": 291,
+        "pinball": 0.07856888977300237,
+        "skill": 0.24321380096544976,
+        "valid": true,
+        "violations": []
+      },
+      "validation_metrics": {
+        "baseline_pinball": 0.10332461340206187,
+        "coverage_80": 0.8109965635738832,
+        "mae_q50": 0.20664922680412373,
+        "n_cells": 291,
+        "pinball": 0.07005982610142626,
+        "skill": 0.3219444642022904,
+        "valid": true,
+        "violations": []
+      }
+    }
+  ],
+  "result_sha256": "6a928e34336ed22ac79257b006bb95b966220b8e642f41c982958c00462e0d20",
+  "schema_version": 1,
+  "spec": {
+    "candidates_per_generation": 3,
+    "folds": [
+      {
+        "embargo_days": 7,
+        "heldout": [
+          "2026-07-14"
+        ],
+        "horizons": [
+          1,
+          3,
+          7
+        ],
+        "train": [
+          "2026-06-30"
+        ],
+        "validation": [
+          "2026-07-07"
+        ]
+      },
+      {
+        "embargo_days": 7,
+        "heldout": [
+          "2026-07-29"
+        ],
+        "horizons": [
+          1,
+          3,
+          7
+        ],
+        "train": [
+          "2026-07-15"
+        ],
+        "validation": [
+          "2026-07-22"
+        ]
+      },
+      {
+        "embargo_days": 7,
+        "heldout": [
+          "2026-08-13"
+        ],
+        "horizons": [
+          1,
+          3,
+          7
+        ],
+        "train": [
+          "2026-07-30"
+        ],
+        "validation": [
+          "2026-08-06"
+        ]
+      },
+      {
+        "embargo_days": 7,
+        "heldout": [
+          "2026-08-28"
+        ],
+        "horizons": [
+          1,
+          3,
+          7
+        ],
+        "train": [
+          "2026-08-14"
+        ],
+        "validation": [
+          "2026-08-21"
+        ]
+      },
+      {
+        "embargo_days": 7,
+        "heldout": [
+          "2026-09-12"
+        ],
+        "horizons": [
+          1,
+          3,
+          7
+        ],
+        "train": [
+          "2026-08-29"
+        ],
+        "validation": [
+          "2026-09-05"
+        ]
+      },
+      {
+        "embargo_days": 7,
+        "heldout": [
+          "2026-09-27"
+        ],
+        "horizons": [
+          1,
+          3,
+          7
+        ],
+        "train": [
+          "2026-09-13"
+        ],
+        "validation": [
+          "2026-09-20"
+        ]
+      },
+      {
+        "embargo_days": 7,
+        "heldout": [
+          "2026-10-12"
+        ],
+        "horizons": [
+          1,
+          3,
+          7
+        ],
+        "train": [
+          "2026-09-28"
+        ],
+        "validation": [
+          "2026-10-05"
+        ]
+      }
+    ],
+    "generations": 2,
+    "max_coverage_regression": 0.05,
+    "min_skill_gain": 0.002,
+    "seeds": [
+      7,
+      29
+    ]
+  },
+  "spec_sha256": "fb16adc64c6b611546b5cfeb520c79df00961d3d4ecf1c2bde3b499ade7da525"
+}

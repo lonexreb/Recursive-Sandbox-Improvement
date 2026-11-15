@@ -17,7 +17,7 @@
 | 0:27–0:35 | Highlight `paired_inference` | “The 90 percent interval crosses zero, so we call this promising development evidence, not a conclusive hidden-test result.” |
 | 0:35–0:55 | Pitch slide 3 | “Each candidate-origin evaluation gets causal history only. Modal starts a fresh gVisor sandbox with blocked outbound network, no secrets or volumes, and fixed resource limits. Only the trusted evaluator sees truth.” |
 | 0:55–1:18 | Terminal: start the live command, then show a trace | “The scientist proposes bounded mutations, executes them, records request and response hashes, rejects failures, and promotes only candidates that improve skill without unacceptable coverage loss.” |
-| 1:18–1:38 | Pitch slide 4 | “Recursive and fixed-anchor controls receive the same operator, random streams, seen set, and charged attempts. Only inheritance differs. Synthetic calibration compounds planted effects and produces no false wins in 20 null studies.” |
+| 1:18–1:38 | Pitch slide 4 | “Recursive and fixed-anchor controls receive the same operator, random streams, seen set, and charged attempts. Only inheritance differs. On seven preregistered real-data folds, recursion gains 2.63 skill points over control; six folds favor recursion. The exact p-value is 0.09375, so this corroborates rather than concludes.” |
 | 1:38–1:55 | Pitch slide 5 | “At the pack’s 33.6-thousand-dollar H100 reference cost, our base three-year value is 25.1 thousand. Rent at reference price. Buy near 25 thousand or with defensible utilization above 80 percent.” |
 | 1:55–2:00 | Repository URL | “The model may change the method. It never changes the test.” |
 
@@ -53,6 +53,13 @@ jq '{data, executor_policy, champion, train_metrics, heldout_metrics, ledger}' \
 head -n 3 runs/video-modal/trace.jsonl | jq
 ```
 
+Preregistered causal result:
+
+```bash
+jq '{spec_sha256, provenance, analysis}' \
+  artifacts/study/gpu_recursive_vs_control_v2.json
+```
+
 ## Fallback if the live service is slow
 
 Do not hide or edit a failure. Say: “The live service did not return inside the demo window,
@@ -63,6 +70,6 @@ and the +0.4040 smoke holdout skill. The fallback proves a prior run, not curren
 ## Claims to keep verbatim
 
 - “Public development evidence,” not “hidden,” “fresh,” or “state of the art.”
-- “Synthetic harness calibration,” not “GPU-price recursive improvement.”
+- “Corroborating preregistered real-data evidence,” not “conclusive recursive improvement.”
 - “Track 2 primary, Modal challenge,” not three simultaneous primary tracks.
 - “Base-case scenario,” not “three-year forecast.”

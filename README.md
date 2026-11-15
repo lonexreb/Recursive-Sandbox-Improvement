@@ -101,6 +101,13 @@ origins fall in a gap with no truth-aligned headline cells. V2 was committed onl
 failure, uses the supported June–October window, and keeps seven non-overlapping held-out
 origin blocks with two fixed search seeds.
 
+The clean, preregistered V2 run produces **+0.1698 mean held-out skill** for recursive
+inheritance versus **+0.1435** for the matched fixed-anchor control: a **+0.02633** paired
+fold gap, with 6/7 fold means positive and exact two-sided `p = 0.09375`. This supports the
+direction of the inheritance hypothesis but is not conclusive at 0.05. See
+[the causal study report](docs/REAL_DATA_CAUSAL_STUDY.md) and the canonical
+[result artifact](artifacts/study/gpu_recursive_vs_control_v2.json).
+
 - Arms: `flat` (no search, re-run to match the ledger), `recursive` (local mutations of
   the evolving champion, fixed seeds skipped) and `control` (the identical mutation
   operator, rng stream, `seen` set and budget, anchored on the fixed starting incumbent).
