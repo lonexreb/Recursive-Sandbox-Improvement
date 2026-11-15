@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
+from .benchmark import run_benchmark
 from .data import load_pack, load_series_file
 from .executors import LocalExecutor, ModalExecutor
 from .loop import date_origins, run_improvement
@@ -43,13 +44,37 @@ def build_parser() -> argparse.ArgumentParser:
     improve.add_argument("--seed", type=int, default=7)
     improve.add_argument("--min-skill-gain", type=float, default=0.002)
     improve.add_argument("--max-coverage-regression", type=float, default=0.05)
+    benchmark = subparsers.add_parser(
+        "benchmark", help="compare the frozen showcase champion with official drift"
+    )
+    benchmark.add_argument("--series-file", required=True, help="starter series_daily.csv")
+    benchmark.add_argument("--catalog", required=True, help="starter series_catalog.csv")
+    benchmark.add_argument("--tier", default="headline")
+    benchmark.add_argument("--cutoff", default="2026-11-06")
+    benchmark.add_argument("--origin-start", default="2026-07-15")
+    benchmark.add_argument("--origin-end", default="2026-10-21")
+    benchmark.add_argument("--origin-step", type=int, default=7)
+    benchmark.add_argument("--horizons", type=_horizons, default=(1, 3, 7))
+    benchmark.add_argument("--out", type=Path, required=True)
     return parser
 
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
-    if args.command != "improve":
-        raise AssertionError("unreachable")
+    if args.command == "benchmark":
+        dataset = load_series_file(args.series_file, args.catalog, args.cutoff, args.tier)
+        origins = date_origins(args.origin_start, args.origin_end, args.origin_step)
+        report = run_benchmark(dataset, origins, args.horizons, args.out)
+        candidate = report["champion_metrics"]
+        drift = report["official_drift_metrics"]
+        comparison = report["comparison"]
+        print(
+            f"champion skill={candidate['skill']:.6f} vs drift={drift['skill']:.6f} | "
+            f"delta={comparison['skill_delta']:+.6f} | "
+            f"pinball reduction={comparison['pinball_reduction_fraction']:.2%}"
+        )
+        print(f"wrote {args.out}")
+        return 0
     if args.series_file:
         if not args.catalog:
             raise SystemExit("--catalog is required with --series-file")

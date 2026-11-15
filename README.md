@@ -4,11 +4,13 @@
 GPU-price quantile forecaster without letting candidate code touch the evaluator,
 future truth, credentials, or the network.
 
-It combines the hackathon tracks into one demo:
+**Submission strategy:** Track 2 (Pacific GPU Value) is the one primary track; Modal is the
+sponsor challenge. The system borrows AI-scientist and typed-role ideas from Tracks 1 and 3,
+but does not claim those additional primary tracks.
 
-- **Track 1 — AI scientist:** propose, run, score, critique, and retain candidate methods.
-- **Track 2 — GPU value:** forecast q10/q50/q90 GPU prices at 1, 3, and 7 days.
-- **Track 3 — multi-agent systems:** explicit proposer, experimenter, evaluator, and safety-gate roles.
+- **Track 2 result:** forecast q10/q50/q90 GPU prices at 1, 3, and 7 days.
+- **Recursive method:** propose, run, score, critique, and retain candidate methods.
+- **Typed roles:** proposer, experimenter, evaluator, and safety gate exchange hashed artifacts.
 - **Modal challenge:** every candidate/origin can run in a fresh gVisor sandbox with blocked
   networking, no secrets, bounded CPU/RAM/time, and history truncated at the origin.
 
@@ -40,6 +42,24 @@ uv run rsi-sandbox improve \
 The output directory contains a checksummed run manifest, every proposal and score,
 the champion lineage, a held-out report, and a cutoff forecast CSV compatible with the
 official starter scorer.
+
+### Reproduce the headline comparison
+
+After running the event starter's `build_series.py`, compare the frozen showcase champion
+with the starter's empirical-drift baseline on the identical 97-series, 15-origin, 1/3/7-day
+scope:
+
+```bash
+uv run rsi-sandbox benchmark \
+  --series-file /path/to/series_daily.csv \
+  --catalog /path/to/series_catalog.csv \
+  --out runs/official-backtest.json
+```
+
+The committed result is in [artifacts/benchmark/report.json](artifacts/benchmark/report.json):
+**+0.219688 skill** versus **+0.183267** for official drift, a +0.036421 skill delta and
+4.46% lower pinball loss. Both methods score the same 4,209 cells. This is a public rolling
+development backtest—not hidden-test or prospective evidence—and the artifact says so.
 
 ## Verified results
 
@@ -103,7 +123,9 @@ not regress interval coverage beyond the configured tolerance. Held-out origins 
 reported once after the loop and never drive selection.
 
 See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for the threat model and
-[docs/HACKATHON.md](docs/HACKATHON.md) for the submission/demo map.
+[docs/HACKATHON.md](docs/HACKATHON.md) for the submission/demo map,
+[docs/JUDGING_SCORECARD.md](docs/JUDGING_SCORECARD.md) for the evidence audit, and
+[docs/GPU_VALUE_THESIS.md](docs/GPU_VALUE_THESIS.md) for the 2–3 year H100 decision.
 
 ## Data
 
