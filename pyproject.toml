@@ -1,0 +1,43 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "recursive-sandbox-improvement"
+version = "0.1.0"
+description = "A bounded, leak-free recursive improvement loop for GPU price forecasting in Modal sandboxes."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Shubhankar Tripathy" }]
+keywords = ["recursive-self-improvement", "modal", "forecasting", "ai-scientist", "sandbox"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+]
+dependencies = []
+
+[project.optional-dependencies]
+modal = ["modal>=1.6,<2"]
+dev = ["pytest>=8.3", "ruff>=0.9"]
+
+[project.scripts]
+rsi-sandbox = "rsi_sandbox.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/rsi_sandbox"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
