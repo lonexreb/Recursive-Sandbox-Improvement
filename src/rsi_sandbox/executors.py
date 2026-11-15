@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+import base64
 import hashlib
 import json
 import os
 import subprocess
 import sys
 import time
+import zlib
 from dataclasses import dataclass
 from typing import Any, Protocol
 
@@ -124,12 +126,16 @@ class ModalExecutor:
     def execute(self, request: dict[str, Any]) -> ExecutionResult:
         payload = canonical_json(request)
         request_sha = hashlib.sha256(payload.encode()).hexdigest()
+        encoded_request = base64.urlsafe_b64encode(
+            zlib.compress(payload.encode(), level=9)
+        ).decode()
         started = time.monotonic()
         sandbox = self.modal.Sandbox.create(
             "python",
-            "-I",
             "-m",
             "rsi_sandbox.worker",
+            "--request-zlib-b64",
+            encoded_request,
             app=self.app,
             image=self.image,
             env={"PYTHONHASHSEED": "0", "LANG": "C.UTF-8", "LC_ALL": "C.UTF-8"},
@@ -143,14 +149,14 @@ class ModalExecutor:
             block_network=True,
         )
         try:
-            sandbox.stdin.write(payload)
-            sandbox.stdin.write_eof()
             output = sandbox.stdout.read()
             stderr = sandbox.stderr.read()
             sandbox.wait()
         finally:
             sandbox.terminate(wait=True)
         duration = time.monotonic() - started
+        if not output.strip():
+            raise RuntimeError(f"Modal worker returned no output: {stderr.strip()[:1000]}")
         return ExecutionResult(
             rows=_parse_output(output),
             duration_seconds=duration,
