@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "status": "preregistration_failed",
+  "spec_path": "studies/gpu_recursive_vs_control_v1.json",
+  "spec_sha256": "9261ec15b0ad1d959439debe02aef4d8a1badeece4fef3f9e9dd61c5fb8889a2",
+  "preregistration_git_commit": "05b50e09e89dd91b59bd4dd9bc124eca4ff29eba",
+  "data_sha256": "a8dc0830ab395b40fdeced6677b4c71d2ea6d30933689ddb56f1761cf3dcd321",
+  "catalog_sha256": "1e06aaf4dd3b93ad6360478bc84e7f1cf37778529b303ef090b4f2eabc39ffac",
+  "failure": {
+    "kind": "unsupported_origin",
+    "message": "fold 1 validation origin 2026-03-11 has no truth-aligned cells",
+    "stage": "incumbent evaluation",
+    "result_generated": false
+  },
+  "diagnosis": "The public headline series have a March-April truth gap. The run stopped without producing or inspecting held-out study results. V2 was specified only after this failure and uses supported June-October origins.",
+  "recording_method": "manual post-failure diagnostic retained for auditability"
+}

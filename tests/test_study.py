@@ -1,11 +1,13 @@
 import copy
 import json
 
+import pytest
 from support import InProcessExecutor, build_folds
 
 from rsi_sandbox.data import day_of
 from rsi_sandbox.executors import FailureKind
 from rsi_sandbox.models import CandidateConfig
+from rsi_sandbox.splits import SpecError
 from rsi_sandbox.study import ARMS, StudySpec, analyze, make_proposer, run_study, sign_flip_p
 from rsi_sandbox.synthetic import FIRST_ORIGIN, synthetic_dataset
 
@@ -85,6 +87,28 @@ def test_proposers_never_see_heldout_data() -> None:
         assert isinstance(champion, CandidateConfig)
         assert isinstance(generation, int) and isinstance(count, int)
         assert all(isinstance(item, tuple) and len(item) == 5 for item in seen)
+
+
+def test_unsupported_preregistered_origin_fails_before_executor_activity() -> None:
+    dataset = synthetic_dataset("planted", 0, n_series=3, days=60)
+    spec = StudySpec(
+        folds=(
+            type(_spec(1, (1,)).folds[0])(
+                train=("2030-01-01",),
+                validation=("2030-01-08",),
+                heldout=("2030-01-15",),
+                horizons=HORIZONS,
+                embargo_days=7,
+            ),
+        ),
+        seeds=(1,),
+    )
+    executor = InProcessExecutor()
+
+    with pytest.raises(SpecError, match="no truth-aligned cells"):
+        run_study(dataset, executor, spec)
+
+    assert executor.requests == []
 
 
 def test_future_truth_changes_only_heldout_study_results() -> None:

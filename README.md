@@ -92,9 +92,14 @@ budget, using preregistered, embargoed folds.
 uv run rsi-sandbox study \
   --series-file /path/to/series_daily.csv \
   --catalog /path/to/series_catalog.csv \
-  --spec studies/gpu_recursive_vs_control_v1.json \
-  --out runs/gpu-recursive-vs-control-v1.json
+  --spec studies/gpu_recursive_vs_control_v2.json \
+  --out runs/gpu-recursive-vs-control-v2.json
 ```
+
+The immutable v1 specification is retained as a preregistration failure: its March–April
+origins fall in a gap with no truth-aligned headline cells. V2 was committed only after that
+failure, uses the supported June–October window, and keeps seven non-overlapping held-out
+origin blocks with two fixed search seeds.
 
 - Arms: `flat` (no search, re-run to match the ledger), `recursive` (local mutations of
   the evolving champion, fixed seeds skipped) and `control` (the identical mutation

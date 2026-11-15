@@ -7,7 +7,7 @@ from collections.abc import Callable
 from dataclasses import asdict, dataclass
 from typing import Any
 
-from .data import Dataset
+from .data import Dataset, day_of
 from .executors import Executor
 from .loop import Propose, _json_safe, provenance, run_search
 from .models import CandidateConfig, canonical_json
@@ -75,6 +75,25 @@ def make_proposer(arm: str, seed: int) -> Propose:
     return BoundedProposer(seed, fixed_seeds=False, strict=True, anchor=anchor).propose
 
 
+def validate_dataset_support(dataset: Dataset, spec: StudySpec) -> None:
+    """Fail before execution when a preregistered origin has no scoreable truth cells."""
+
+    for fold_index, fold in enumerate(spec.folds):
+        for phase in ("train", "validation", "heldout"):
+            for origin in getattr(fold, phase):
+                origin_day = day_of(origin)
+                cells = sum(
+                    dataset.last_value(series_id, origin_day) is not None
+                    and dataset.value_at(series_id, origin_day + horizon) is not None
+                    for series_id in dataset.series
+                    for horizon in fold.horizons
+                )
+                if cells == 0:
+                    raise SpecError(
+                        f"fold {fold_index} {phase} origin {origin} has no truth-aligned cells"
+                    )
+
+
 def sign_flip_p(blocks: list[float]) -> float:
     """Exact two-sided paired sign-flip permutation test on block means (<= 14 blocks)."""
 
@@ -124,7 +143,8 @@ def run_study(
 ) -> dict[str, Any]:
     """Run every (fold, seed, arm); returns the canonical manifest/result with its SHA-256."""
 
-    spec.validate()  # before any executor activity
+    spec.validate()
+    validate_dataset_support(dataset, spec)  # before any executor activity
     records = []
     for f, fold in enumerate(spec.folds):
         for seed in spec.seeds:
