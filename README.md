@@ -84,9 +84,17 @@ These results are evidence for the implementation, not a claim about withheld ju
 
 ## Budget-matched study (research harness)
 
-`rsi_sandbox.study.run_study` (programmatic API; a CLI is deferred) asks whether
+`rsi-sandbox study` asks whether
 champion-conditioned search beats a matched champion-independent control at an equal
 budget, using preregistered, embargoed folds.
+
+```bash
+uv run rsi-sandbox study \
+  --series-file /path/to/series_daily.csv \
+  --catalog /path/to/series_catalog.csv \
+  --spec studies/gpu_recursive_vs_control_v1.json \
+  --out runs/gpu-recursive-vs-control-v1.json
+```
 
 - Arms: `flat` (no search, re-run to match the ledger), `recursive` (local mutations of
   the evolving champion, fixed seeds skipped) and `control` (the identical mutation

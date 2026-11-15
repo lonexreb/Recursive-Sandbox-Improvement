@@ -1,12 +1,14 @@
 from __future__ import annotations
 
 import argparse
+import json
 from pathlib import Path
 
 from .benchmark import run_benchmark
 from .data import load_pack, load_series_file
 from .executors import LocalExecutor, ModalExecutor
 from .loop import date_origins, run_improvement
+from .study import StudySpec, run_study
 
 
 def _horizons(value: str) -> tuple[int, ...]:
@@ -56,6 +58,22 @@ def build_parser() -> argparse.ArgumentParser:
     benchmark.add_argument("--origin-step", type=int, default=7)
     benchmark.add_argument("--horizons", type=_horizons, default=(1, 3, 7))
     benchmark.add_argument("--out", type=Path, required=True)
+    study = subparsers.add_parser(
+        "study", help="run a preregistered equal-budget recursive-vs-control study"
+    )
+    study_data = study.add_mutually_exclusive_group(required=True)
+    study_data.add_argument(
+        "--pack", help="official pack directory containing daily_statistics.csv"
+    )
+    study_data.add_argument("--series-file", help="starter-generated series_daily.csv")
+    study.add_argument("--catalog", help="starter series_catalog.csv (with --series-file)")
+    study.add_argument("--tier", default="headline")
+    study.add_argument("--cutoff", default="2026-11-06")
+    study.add_argument("--backend", choices=("local", "modal"), default="local")
+    study.add_argument("--modal-app", default="recursive-sandbox-improvement")
+    study.add_argument("--timeout", type=int, default=60)
+    study.add_argument("--spec", type=Path, required=True, help="preregistered study JSON")
+    study.add_argument("--out", type=Path, required=True, help="canonical study result JSON")
     return parser
 
 
@@ -73,6 +91,35 @@ def main(argv: list[str] | None = None) -> int:
             f"delta={comparison['skill_delta']:+.6f} | "
             f"pinball reduction={comparison['pinball_reduction_fraction']:.2%}"
         )
+        print(f"wrote {args.out}")
+        return 0
+    if args.command == "study":
+        if args.series_file:
+            if not args.catalog:
+                raise SystemExit("--catalog is required with --series-file")
+            dataset = load_series_file(args.series_file, args.catalog, args.cutoff, args.tier)
+        else:
+            dataset = load_pack(args.pack, args.cutoff)
+        executor = (
+            ModalExecutor(args.modal_app, args.timeout)
+            if args.backend == "modal"
+            else LocalExecutor(args.timeout)
+        )
+        raw_spec = json.loads(args.spec.read_text())
+        if not isinstance(raw_spec, dict):
+            raise SystemExit("study spec must be a JSON object")
+        result = run_study(dataset, executor, StudySpec.from_dict(raw_spec))
+        args.out.parent.mkdir(parents=True, exist_ok=True)
+        args.out.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
+        comparison = result["analysis"].get("recursive_minus_control")
+        if comparison:
+            print(
+                "recursive-control "
+                f"mean={comparison['mean']:+.6f} | "
+                f"exact p={comparison['p_value_two_sided']:.6f}"
+            )
+        else:
+            print(f"invalid study: {result['analysis']['reason']}")
         print(f"wrote {args.out}")
         return 0
     if args.series_file:
