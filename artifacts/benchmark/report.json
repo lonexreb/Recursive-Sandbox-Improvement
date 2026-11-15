@@ -1,0 +1,82 @@
+{
+  "champion_metrics": {
+    "baseline_pinball": 0.06499957976954146,
+    "coverage_80": 0.756711808030411,
+    "mae_q50": 0.1302001457425634,
+    "n_cells": 4209,
+    "pinball": 0.0507199197434068,
+    "skill": 0.21968849762973475,
+    "valid": true,
+    "violations": []
+  },
+  "comparison": {
+    "pinball_reduction_fraction": 0.04459378596018049,
+    "skill_delta": 0.03642120347096278
+  },
+  "contract": {
+    "champion": {
+      "candidate_id": "showcase-champion-bbd2e72dabee",
+      "drift_scale": 0.25,
+      "interval_scale": 1.25,
+      "lookback_days": 45,
+      "min_samples": 5,
+      "name": "showcase-champion",
+      "parent_id": null,
+      "recency_half_life_days": 14
+    },
+    "comparison": "official starter empirical drift, min_samples=20",
+    "horizons": [
+      1,
+      3,
+      7
+    ],
+    "origins": [
+      "2026-07-15",
+      "2026-07-22",
+      "2026-07-29",
+      "2026-08-05",
+      "2026-08-12",
+      "2026-08-19",
+      "2026-08-26",
+      "2026-09-02",
+      "2026-09-09",
+      "2026-09-16",
+      "2026-09-23",
+      "2026-09-30",
+      "2026-10-07",
+      "2026-10-14",
+      "2026-10-21"
+    ]
+  },
+  "contract_sha256": "a39e3837f045f822dd16bd5accdfecc3753cc90a7bc39cf4987387e91362b5b7",
+  "created_at_utc": "2026-11-15T21:53:13.149223+00:00",
+  "data": {
+    "cutoff": "2026-11-06",
+    "points": 54267,
+    "scope": "starter catalog tier=headline; catalog_sha256=1e06aaf4dd3b93ad6360478bc84e7f1cf37778529b303ef090b4f2eabc39ffac",
+    "series": 97,
+    "sha256": "a8dc0830ab395b40fdeced6677b4c71d2ea6d30933689ddb56f1761cf3dcd321",
+    "source": "series_daily.csv"
+  },
+  "evaluator_sha256": "472f6546e2c363778b89aa77284c8a4cf9e3fda5fb7cc0a4fa7d5a8b82a7ff22",
+  "official_drift_metrics": {
+    "baseline_pinball": 0.06499957976954146,
+    "coverage_80": 0.7602755999049655,
+    "mae_q50": 0.1320355350404712,
+    "n_cells": 4209,
+    "pinball": 0.05308728266372034,
+    "skill": 0.18326729415877197,
+    "valid": true,
+    "violations": []
+  },
+  "provenance": {
+    "git_commit": "de65c7509c8265c80087b9d86b256b036e83b690",
+    "git_dirty": false,
+    "git_dirty_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "scorer_sha256": "472f6546e2c363778b89aa77284c8a4cf9e3fda5fb7cc0a4fa7d5a8b82a7ff22"
+  },
+  "report_sha256": "c6d14bddf8ce282619213c06ad0b0595ab2fe60e2e76fdcdeae9665463a7a7a2",
+  "schema_version": 1,
+  "status": "development_backtest",
+  "warning": "Origins are public development evidence, not a fresh or hidden confirmation set."
+}

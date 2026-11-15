@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "status": "scored",
+  "scope": {
+    "series": 97,
+    "origins": 15,
+    "horizons": [1, 3, 7],
+    "cells": 4209,
+    "quantiles": [0.1, 0.5, 0.9]
+  },
+  "inputs": {
+    "series_daily_sha256": "a8dc0830ab395b40fdeced6677b4c71d2ea6d30933689ddb56f1761cf3dcd321",
+    "series_catalog_sha256": "1e06aaf4dd3b93ad6360478bc84e7f1cf37778529b303ef090b4f2eabc39ffac",
+    "official_scorer_sha256": "38f197e966169d898b5b209e83bcf1c26b0cf5a3a5116e51d9a40aed5875037b",
+    "champion_forecast_sha256": "7b634f223d295ee5a93195cccc8e30d891f8294d50702956d02ade5eec358495",
+    "official_drift_forecast_sha256": "fbef4c01b8d5a86164cbd520c773ecbcf929d779d2f284727359fb1c64b77388"
+  },
+  "champion": {
+    "skill_pooled": 0.219688,
+    "pinball": 0.05072,
+    "coverage_80": 0.756712,
+    "report_sha256": "3050e216c47985ccb1bc663115ccbcf6656c7815c312e0a0f3ccbae5bfb7b6d5"
+  },
+  "official_drift": {
+    "skill_pooled": 0.183267,
+    "pinball": 0.053087,
+    "coverage_80": 0.760276,
+    "report_sha256": "8d0ce47cddf5bb7d0340901cbf3190735cd98702d103c6ee7e0037be2a49f6a8"
+  },
+  "warning": "Public rolling development backtest; not hidden or prospective evidence. Forecast and report hashes identify local generated files that are not redistributed with the event data."
+}
