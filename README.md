@@ -41,6 +41,20 @@ The output directory contains a checksummed run manifest, every proposal and sco
 the champion lineage, a held-out report, and a cutoff forecast CSV compatible with the
 official starter scorer.
 
+## Verified results
+
+The committed [full demo](artifacts/demo/run.json) uses 37 official headline series,
+five optimization origins, and two untouched held-out origins. The loop promoted twice:
+
+| Run | Train skill | Held-out skill | Held-out coverage | Cells |
+| --- | ---: | ---: | ---: | ---: |
+| Local full loop (1/3/7 day) | +0.1892 | **+0.0513** | 72.4% | 196 |
+| Modal smoke (1 day) | +0.3454 | **+0.4040** | 87.5% | 24 |
+
+Skill is `1 - candidate pinball / last-value pinball`; positive is better. The Modal
+smoke artifact is in [artifacts/modal-smoke/run.json](artifacts/modal-smoke/run.json).
+These results are evidence for the implementation, not a claim about withheld judging data.
+
 ## Safety boundary
 
 ```text
@@ -66,7 +80,17 @@ The repository does not redistribute the event data. Point `--pack` at the offic
 directory containing `daily_statistics.csv`. RSI applies the pack's cutoff and headline
 gates and records the source file SHA-256 in every run.
 
+If you already ran the official starter's `build_series.py`, use its exact scope instead:
+
+```bash
+uv run rsi-sandbox improve \
+  --series-file /path/to/series_daily.csv \
+  --catalog /path/to/series_catalog.csv \
+  --tier headline \
+  --backend local \
+  --out runs/starter-scope
+```
+
 ## License
 
 MIT. Event data retains its own source licenses and is never copied into this repository.
-

@@ -1,0 +1,117 @@
+{
+  "champion": {
+    "candidate_id": "g1-proposal-1-2dfd9f265084",
+    "drift_scale": 1.0,
+    "interval_scale": 1.0,
+    "lookback_days": 0,
+    "min_samples": 8,
+    "name": "g1-proposal-1",
+    "parent_id": "flat-last-value-223ad40d188a",
+    "recency_half_life_days": 0
+  },
+  "created_at_utc": "2026-11-15T20:32:59.194178+00:00",
+  "data": {
+    "cutoff": "2026-11-06",
+    "points": 3293,
+    "scope": "official daily_statistics headline gates",
+    "series": 37,
+    "sha256": "79b6c4ec42aedc5f882d6827bb1d8bcab82a7f6853a9a009abb7662883b67478",
+    "source": "daily_statistics.csv"
+  },
+  "executor_policy": {
+    "app": "recursive-sandbox-improvement",
+    "backend": "modal-sandbox",
+    "block_network": true,
+    "cpu_request_limit": [
+      0.25,
+      1.0
+    ],
+    "fresh_sandbox_per_candidate_origin": true,
+    "idle_timeout_seconds": 30,
+    "memory_request_limit_mb": [
+      256,
+      512
+    ],
+    "runtime": "gvisor",
+    "secrets": [],
+    "timeout_seconds": 60,
+    "volumes": []
+  },
+  "experiment_contract": {
+    "candidates_per_generation": 1,
+    "cutoff": "2026-11-06",
+    "generations": 1,
+    "heldout_origins": [
+      "2026-10-23"
+    ],
+    "heldout_used_for_selection": false,
+    "horizons": [
+      1
+    ],
+    "max_coverage_regression": 0.05,
+    "min_skill_gain": 0.002,
+    "train_origins": [
+      "2026-10-09"
+    ]
+  },
+  "experiments": [
+    {
+      "candidate": {
+        "candidate_id": "g1-proposal-1-2dfd9f265084",
+        "drift_scale": 1.0,
+        "interval_scale": 1.0,
+        "lookback_days": 0,
+        "min_samples": 8,
+        "name": "g1-proposal-1",
+        "parent_id": "flat-last-value-223ad40d188a",
+        "recency_half_life_days": 0
+      },
+      "generation": 1,
+      "promotion_gate": {
+        "passed": true,
+        "reasons": []
+      },
+      "train_metrics": {
+        "baseline_pinball": 0.0044027027027027195,
+        "coverage_80": 0.7297297297297297,
+        "mae_q50": 0.008733609320480246,
+        "n_cells": 37,
+        "pinball": 0.0028817960348524537,
+        "skill": 0.34544841442884977,
+        "valid": true,
+        "violations": []
+      }
+    }
+  ],
+  "git_commit": "18ce0b1d86bd47e95b680a4df74ecd857237cbe5",
+  "heldout_metrics": {
+    "baseline_pinball": 0.0030375000000000146,
+    "coverage_80": 0.875,
+    "mae_q50": 0.005837061810974879,
+    "n_cells": 24,
+    "pinball": 0.0018104591857088107,
+    "skill": 0.40396405408763725,
+    "valid": true,
+    "violations": []
+  },
+  "lineage": [
+    "flat-last-value-223ad40d188a",
+    "g1-proposal-1-2dfd9f265084"
+  ],
+  "outputs": {
+    "forecast": "forecast_2026-11-06.csv",
+    "trace": "trace.jsonl"
+  },
+  "schema_version": 1,
+  "seed": 7,
+  "train_metrics": {
+    "baseline_pinball": 0.0044027027027027195,
+    "coverage_80": 0.7297297297297297,
+    "mae_q50": 0.008733609320480246,
+    "n_cells": 37,
+    "pinball": 0.0028817960348524537,
+    "skill": 0.34544841442884977,
+    "valid": true,
+    "violations": []
+  }
+}
