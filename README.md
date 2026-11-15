@@ -129,6 +129,14 @@ See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for the threat model and
 [docs/JUDGING_SCORECARD.md](docs/JUDGING_SCORECARD.md) for the evidence audit, and
 [docs/GPU_VALUE_THESIS.md](docs/GPU_VALUE_THESIS.md) for the 2–3 year H100 decision.
 
+## Pitch package
+
+- [Three-minute judging deck](pitch/RSI_Hackathon_Pitch_v2.pptx), with editable native
+  charts, source notes, and a validated five-slide structure.
+- [Two-minute video shot list](docs/VIDEO_SHOTLIST.md), including exact screen actions,
+  narration, claim boundaries, and a live-service fallback.
+- [Spoken finals script](docs/HACKATHON.md#three-minute-finals-script).
+
 ## Data
 
 The repository does not redistribute the event data. Point `--pack` at the official
