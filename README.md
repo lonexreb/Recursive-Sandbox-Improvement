@@ -58,8 +58,10 @@ uv run rsi-sandbox benchmark \
 
 The committed result is in [artifacts/benchmark/report.json](artifacts/benchmark/report.json):
 **+0.219688 skill** versus **+0.183267** for official drift, a +0.036421 skill delta and
-4.46% lower pinball loss. Both methods score the same 4,209 cells. This is a public rolling
-development backtest—not hidden-test or prospective evidence—and the artifact says so.
+4.46% lower pinball loss. Both methods score the same 4,209 cells; the champion wins 12 of
+15 weekly origins. The 90% origin-block bootstrap interval for the pinball delta includes
+zero, so this is promising public development evidence—not a statistically conclusive,
+hidden-test, or prospective result—and the artifact says so.
 
 ## Verified results
 

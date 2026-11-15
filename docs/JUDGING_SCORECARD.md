@@ -12,16 +12,16 @@ must make obvious to a judge in three minutes.
 | --- | --- | ---: | --- | ---: |
 | Research rigour | Causal history truncation; truth outside sandbox; immutable evaluator; chronological embargoed splits; equal charged budgets; exact paired test; null/planted calibration; burned-set warning | 19/20 | Real recursive-vs-control effect on GPU data is not prospectively confirmed | 19/20 |
 | Novelty | Sandbox is a scientific validity boundary, not just compute; recursive inheritance isolated from exploration breadth; candidate cannot alter test/resources/promotion | 19/20 | Must explain in one sentence before implementation detail | 19/20 |
-| Results | 97 series, 15 origins, 4,209 cells: +0.219688 skill vs +0.183267 official drift; 4.46% lower pinball; live Modal smoke +0.4040 | 18/20 | Public development backtest; hidden score unknown | 18/20 |
+| Results | 97 series, 15 origins, 4,209 cells: +0.219688 skill vs +0.183267 official drift; 4.46% lower pinball; 12/15 origin wins; live Modal smoke +0.4040 | 17/20 | 90% origin-block interval includes zero; public development backtest; hidden score unknown | 17/20 |
 | Autonomy & self-improvement | Typed proposer → sandbox experimenter → evaluator → safety gate → lineage; equal-budget recursive/fixed-anchor/flat study; promotions and rejections retained | 18/20 | Main CLI proposer is bounded deterministic search, not an LLM scientist | 18/20 |
 | Interpretability & reproducibility | One-command CLI; official-format CSV; source/config/scorer/request/response/git hashes; typed failures; committed artifacts; tests; decision logs | 20/20 | Event data cannot be redistributed, so path to official pack must be supplied | 20/20 |
-| **Weighted total** |  | **94/100** | A score is only useful if every claim survives live inspection | **94/100** |
+| **Weighted total** |  | **93/100** | A score is only useful if every claim survives live inspection | **93/100** |
 
 ## Track 2 evidence gate
 
 | Required story | Pass condition | Evidence |
 | --- | --- | --- |
-| Beat a market-relevant baseline | Same cells, horizons, quantiles, truth, scorer and skill denominator | `artifacts/benchmark/report.json`; champion +0.219688 vs drift +0.183267 |
+| Beat a market-relevant baseline | Same cells, horizons, quantiles, truth, scorer and skill denominator; uncertainty visible | `artifacts/benchmark/report.json`; champion +0.219688 vs drift +0.183267, 12/15 origins, 90% interval crosses zero |
 | No leakage | Candidate request contains no point after origin; held-out never drives promotion | `test_data_boundary.py`, `test_loop.py`, manifest contract |
 | Calibrated uncertainty | q10 ≤ q50 ≤ q90 and coverage shown, not only point accuracy | 75.67% interval coverage on development backtest; schema gate |
 | Economic insight | Translate forecast evidence into a falsifiable 2–3 year H100 buy/rent rule | `docs/GPU_VALUE_THESIS.md` |

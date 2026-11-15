@@ -17,7 +17,8 @@ own promotion gate.
 ## Two-minute demo
 
 1. **0:00–0:15 — result first.** Show +0.219688 champion skill versus +0.183267 official
-   drift on the same 4,209 cells, plus the “development backtest” warning.
+   drift on the same 4,209 cells and 12/15 origin wins. Show that the 90% interval crosses
+   zero instead of hiding uncertainty.
 2. **0:15–0:35 — the problem.** Ordinary self-improvement can rewrite its test. Point to
    the trusted boundary: truth, evaluator, resources, and promotion gate stay outside.
 3. **0:35–1:05 — live loop.** Start `rsi-sandbox improve`; show proposals branching from
@@ -67,7 +68,9 @@ promotion.
 
 On the official 97-series rolling scope, our frozen champion scores +0.219688 skill against
 last value. The official drift baseline scores +0.183267 on the exact same 4,209 cells. That
-is 4.46% less pinball loss. This is development evidence, not a hidden-test claim.
+is 4.46% less pinball loss and 12 wins across 15 weekly origins. The origin-block bootstrap
+interval includes zero, so this is promising development evidence, not a conclusive or
+hidden-test claim.
 
 The recursion is testable too. Recursive and fixed-anchor control arms use the same mutation
 operator, seeds, and charged candidate-origin attempts. The only difference is whether a
