@@ -6,6 +6,8 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 .uv-cache/
+.deck-build/
+.chart-data-*/
 build/
 dist/
 *.egg-info/
