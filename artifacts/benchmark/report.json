@@ -1,4 +1,156 @@
 {
+  "by_origin": [
+    {
+      "cells": 252,
+      "champion_coverage_80": 0.5833333333333334,
+      "champion_pinball": 0.07801105385270916,
+      "champion_skill": 0.28841788952710345,
+      "drift_coverage_80": 0.6587301587301587,
+      "drift_pinball": 0.07724919650228104,
+      "drift_skill": 0.29536721317449977,
+      "origin": "2026-07-15"
+    },
+    {
+      "cells": 252,
+      "champion_coverage_80": 0.7341269841269841,
+      "champion_pinball": 0.04621625466412035,
+      "champion_skill": 0.27812418989909216,
+      "drift_coverage_80": 0.7658730158730159,
+      "drift_pinball": 0.05250155915618614,
+      "drift_skill": 0.17995073761665747,
+      "origin": "2026-07-22"
+    },
+    {
+      "cells": 252,
+      "champion_coverage_80": 0.7142857142857143,
+      "champion_pinball": 0.04381756740458439,
+      "champion_skill": 0.23710472652053693,
+      "drift_coverage_80": 0.753968253968254,
+      "drift_pinball": 0.048680954117944035,
+      "drift_skill": 0.15242967593028645,
+      "origin": "2026-07-29"
+    },
+    {
+      "cells": 291,
+      "champion_coverage_80": 0.7422680412371134,
+      "champion_pinball": 0.03904639878159176,
+      "champion_skill": 0.2356583690891082,
+      "drift_coverage_80": 0.738831615120275,
+      "drift_pinball": 0.043993652225356304,
+      "drift_skill": 0.1388148218291433,
+      "origin": "2026-08-05"
+    },
+    {
+      "cells": 291,
+      "champion_coverage_80": 0.6907216494845361,
+      "champion_pinball": 0.05453692914836194,
+      "champion_skill": 0.2159365035924936,
+      "drift_coverage_80": 0.7560137457044673,
+      "drift_pinball": 0.055386278632452095,
+      "drift_skill": 0.20372562306498876,
+      "origin": "2026-08-12"
+    },
+    {
+      "cells": 291,
+      "champion_coverage_80": 0.7903780068728522,
+      "champion_pinball": 0.04997140180578249,
+      "champion_skill": 0.3069253834527472,
+      "drift_coverage_80": 0.7457044673539519,
+      "drift_pinball": 0.05751403743741552,
+      "drift_skill": 0.2023133631922952,
+      "origin": "2026-08-19"
+    },
+    {
+      "cells": 291,
+      "champion_coverage_80": 0.8797250859106529,
+      "champion_pinball": 0.03225201834363431,
+      "champion_skill": 0.19802933898031527,
+      "drift_coverage_80": 0.872852233676976,
+      "drift_pinball": 0.03700148528073689,
+      "drift_skill": 0.07993027620364168,
+      "origin": "2026-08-26"
+    },
+    {
+      "cells": 291,
+      "champion_coverage_80": 0.7972508591065293,
+      "champion_pinball": 0.03667730720244827,
+      "champion_skill": 0.21275099554466126,
+      "drift_coverage_80": 0.852233676975945,
+      "drift_pinball": 0.039066982949920184,
+      "drift_skill": 0.16145852080587364,
+      "origin": "2026-09-02"
+    },
+    {
+      "cells": 291,
+      "champion_coverage_80": 0.8694158075601375,
+      "champion_pinball": 0.027730351618874785,
+      "champion_skill": 0.12927632655324295,
+      "drift_coverage_80": 0.852233676975945,
+      "drift_pinball": 0.033095001964508264,
+      "drift_skill": -0.039171882106613154,
+      "origin": "2026-09-09"
+    },
+    {
+      "cells": 291,
+      "champion_coverage_80": 0.8316151202749141,
+      "champion_pinball": 0.02456119219397357,
+      "champion_skill": 0.13198719764074995,
+      "drift_coverage_80": 0.8384879725085911,
+      "drift_pinball": 0.032529523582950734,
+      "drift_skill": -0.14962020986817115,
+      "origin": "2026-09-16"
+    },
+    {
+      "cells": 291,
+      "champion_coverage_80": 0.8041237113402062,
+      "champion_pinball": 0.026822380918050205,
+      "champion_skill": 0.20406260073056726,
+      "drift_coverage_80": 0.7903780068728522,
+      "drift_pinball": 0.03482916237867362,
+      "drift_skill": -0.03353363771516471,
+      "origin": "2026-09-23"
+    },
+    {
+      "cells": 291,
+      "champion_coverage_80": 0.4570446735395189,
+      "champion_pinball": 0.13004722436565158,
+      "champion_skill": 0.10204683438970952,
+      "drift_coverage_80": 0.5292096219931272,
+      "drift_pinball": 0.1129552717782161,
+      "drift_skill": 0.22006375483697427,
+      "origin": "2026-09-30"
+    },
+    {
+      "cells": 278,
+      "champion_coverage_80": 0.7985611510791367,
+      "champion_pinball": 0.06753758319527864,
+      "champion_skill": 0.2968538470408074,
+      "drift_coverage_80": 0.6798561151079137,
+      "drift_pinball": 0.06571141709041493,
+      "drift_skill": 0.31586639695078333,
+      "origin": "2026-10-07"
+    },
+    {
+      "cells": 278,
+      "champion_coverage_80": 0.8129496402877698,
+      "champion_pinball": 0.05613182930803115,
+      "champion_skill": 0.2374733229154764,
+      "drift_coverage_80": 0.7553956834532374,
+      "drift_pinball": 0.05751852644956352,
+      "drift_skill": 0.2186356406861536,
+      "origin": "2026-10-14"
+    },
+    {
+      "cells": 278,
+      "champion_coverage_80": 0.8201438848920863,
+      "champion_pinball": 0.050553893229415295,
+      "champion_skill": 0.19143248644985278,
+      "drift_coverage_80": 0.7985611510791367,
+      "drift_pinball": 0.051538062089325355,
+      "drift_skill": 0.17569152334816363,
+      "origin": "2026-10-21"
+    }
+  ],
   "champion_metrics": {
     "baseline_pinball": 0.06499957976954146,
     "coverage_80": 0.756711808030411,
@@ -49,7 +201,7 @@
     ]
   },
   "contract_sha256": "a39e3837f045f822dd16bd5accdfecc3753cc90a7bc39cf4987387e91362b5b7",
-  "created_at_utc": "2026-11-15T21:53:13.149223+00:00",
+  "created_at_utc": "2026-11-15T21:58:15.179286+00:00",
   "data": {
     "cutoff": "2026-11-06",
     "points": 54267,
@@ -69,13 +221,26 @@
     "valid": true,
     "violations": []
   },
+  "paired_inference": {
+    "blocks": 15,
+    "bootstrap_samples": 20000,
+    "champion_wins": 12,
+    "exact_two_sided_sign_flip_p": 0.1614990234375,
+    "interpretation": "Negative favors the champion. The interval includes zero, so this public development result is promising but not statistically conclusive.",
+    "mean_origin_pinball_delta": -0.002377181706895789,
+    "unit": "weekly origin block",
+    "weighted_pinball_delta_bootstrap_90_ci": [
+      -0.004691891149011472,
+      0.0004563205055210396
+    ]
+  },
   "provenance": {
-    "git_commit": "de65c7509c8265c80087b9d86b256b036e83b690",
+    "git_commit": "168e27d53c617bb34f8f569b0fc6ad807ea6457e",
     "git_dirty": false,
     "git_dirty_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
     "scorer_sha256": "472f6546e2c363778b89aa77284c8a4cf9e3fda5fb7cc0a4fa7d5a8b82a7ff22"
   },
-  "report_sha256": "c6d14bddf8ce282619213c06ad0b0595ab2fe60e2e76fdcdeae9665463a7a7a2",
+  "report_sha256": "8d3e10b54aa7441b21a27bd2ceabde355c33ec05bb096760ec9a9088af4f3579",
   "schema_version": 1,
   "status": "development_backtest",
   "warning": "Origins are public development evidence, not a fresh or hidden confirmation set."
